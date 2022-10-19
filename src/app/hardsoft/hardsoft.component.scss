@@ -1,0 +1,489 @@
+/*
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background: #2c7c7c;
+    height: 100vh;
+}
+
+.container-title {
+    text-align: center;
+}
+
+
+.container-skills1 {
+  
+}
+
+.mat-card {
+    background: #308e93;
+    color: rgba(90, 49, 49, 0.95);
+} 
+
+:host::ng-deep mat-card-content {
+    display: flex;
+    justify-content: space-evenly;
+
+    .progress1, .progress2, .progress3 {
+        width: 30%;
+    }
+}
+
+:host::ng-deep mat-progress-spinner{
+
+    svg {
+        width: 88px !important;
+        height: 80px !important;
+    }
+}
+
+*/
+
+/*
+
+    TESTING 1 START
+
+*/
+
+//variables
+
+//$color_principal: #b76271;
+$color_principal_rosa: #eb768a;
+$color_principal_azul: #3790b8;
+$color_principal_azul-oscuro: #224454d4;
+
+
+
+//icono color
+$color_icono: #05928c6e;
+$color_icono-1: #432254;
+
+//texto color
+$color_texto-morado: #432254;
+$color_texto_morado-claro:#6262a7;
+
+//animacion de barra de progreso
+::ng-deep .mat-progress-bar .mat-progress-bar-background {
+  animation: ease !important;
+  animation-duration: 40s !important;
+  animation-direction: reverse !important;
+}
+
+::ng-deep .mat-progress-bar .mat-progress-bar-fill {
+  animation: ease !important;
+  animation-duration: 30s !important;
+  animation-direction: reverse !important;
+  transition: transform 5s linear !important;
+  
+}
+
+::ng-deep .mat-progress-bar {
+  height: 90% !important;
+}
+
+::ng-deep ._mat-animation-noopable.mat-progress-bar {
+  transition: all 8s !important;
+  animation: ease !important;
+}
+
+
+/*
+.skill {
+  background-color: #186672ab;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.skill_title {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: relative;
+  flex-direction: row;
+  width: 50%;
+
+  h2 {
+    color:#02e8e09c;
+  }
+
+  .edit-icon1 {
+    cursor: pointer;
+    color: burlywood;
+    font-size: 30px;
+  }
+
+}
+*/
+
+.skill {
+  height: 100%;
+  width: 100%;
+  //background-color: crimson;
+
+  .skilltitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 10%;
+    color: wheat;
+    text-align: center;
+    //background-color: black;
+
+    .h1_container {
+
+      width: 90%;
+      height: 60%;
+      //background-color: red;
+
+      h1 {
+        font-size: 36px;
+        color: $color_principal_azul-oscuro;
+      }
+
+    }
+  
+  }
+
+  .espaciador {
+    background-color: #62a7a7;
+    height: 50px;
+    width: 100%;
+  }
+
+}
+
+
+.skill-container-height {
+  display: flex;
+  //justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 90%;
+  width: 98%;
+  //background-color: #52576500;
+
+  /*
+  .spacing {
+    background-color: crimson;
+    height: 20px;
+    width: 100%;
+  }
+  */
+  
+  /*
+  .icon_edit {
+    cursor: pointer;
+    font-size: 22px;
+    color: gainsboro;
+  }
+  */
+}
+
+.inner_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 90%;
+  
+  //background-color: #154c48;
+
+  .inner_container--imgtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 160px;
+    width: 90%;
+    //background-color: #2b75c8;
+  
+  }
+
+  // IMAGEN
+  ._imgtitle--imgcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    width: 50%;
+    //background-color: bisque;
+    
+    .image_forma {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //border-radius: 50px 50px 50px 50px / 45px 45px 45px 45px;
+      clip-path: polygon(15% 0, 85% 0, 100% 21%, 100% 79%, 82% 100%, 15% 100%, 0 76%, 0 22%);
+      width: 40%;
+      height: 80%;
+      background-color: $color_principal_azul-oscuro;
+      //background-color: #1e6188;
+    }
+
+    img {
+      //width: 96px;
+      //height: 96px;
+      //border-radius: 50px 50px 50px 50px / 45px 45px 45px 45px;
+      border-radius: 30px 30px 30px 30px / 45px 45px 45px 45px;
+      height: 60%;
+      width: 60%;
+      max-height: 80%;
+      max-width: 80%;
+    }
+
+  }
+
+  // TITULO
+  ._imgtitle--textcontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    height: 50%;
+    //background-color: chartreuse;
+
+
+    h2 {
+      font-size: 25px;
+      color: $color_principal_azul-oscuro;
+    }
+
+  }
+
+  .inner_container--icontext {
+    display: flex;
+    justify-content: center;
+    //align-items: center;
+    height: 160px;
+    width: 75%;
+
+    ._icontext--lista {
+      width: 90%;
+    }
+
+    overflow: scroll;
+
+    ._lista--container {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px;        
+      border-bottom: 1px solid #673ab729;
+      //background-color: #1e6188;
+
+      p {
+        font-size: 18px;
+        color: $color_texto_morado-claro;
+      }
+
+      i {
+        font-size: 22px;
+        color: $color_texto_morado-claro;
+      }
+    }
+
+  }
+
+  opacity: 1;
+  background:#62a7a7;
+
+  /*
+  .container_icon_modo-edition {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    background: bisque;
+    width: 200px;
+    height: 150px;
+
+    i {
+      font-size: 30px;
+    }
+  }
+  */
+
+
+}
+
+//activar en la version movil  ------------
+/*
+.inner_container:hover {
+  transform:scale(1.03);
+  opacity: 0.8;
+  cursor: pointer;
+  border: 1px solid #3790b842;
+
+  box-shadow: 0px 0px 46px -8px rgba(0,0,0,0.75);
+}
+*/
+
+/*
+.inner_container::after{
+  content: "EDITAR";
+  font-size: 18px;
+  color: black;
+  padding-left: 20px;
+
+  background-color:#ededed;
+	border-radius:15px;
+	border:1px solid #d6bcd6;
+	display:inline-block;
+	cursor:pointer;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.skill-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  //border: 1px solid #1f366bc4;
+
+  width: 90%;
+  height: 80%;
+  
+  background-color: #0b7eeb24;
+
+  border: 1px solid #79ebbc;
+  border-radius: 20px;
+
+  // inicio de barra de progreso
+  .progress_container{
+    width: 100%;
+    height: 50%;
+    //background-color: #0d6efd;
+
+    .title_container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-direction: row;
+      width: 70%;
+      height: 90%;
+
+      // probamos
+      .probamos {
+        position: relative;
+        background-color: #79ebbc;
+        width: 100%;
+        height: 100%;
+
+        span {
+          position: absolute;
+          right: 0;
+          z-index: 1;
+          color: darkslategrey;
+        }
+      }
+      // probamos
+  
+      h2 {
+        width: 50%;
+        color: #154c48;
+        position: absolute;
+      }
+
+      .progress {
+        position: relative;
+        width: 100%;
+        height: 90%;
+        background-color: #79ebbc;
+
+       
+
+        .progress-bar {
+          position: relative;
+          width: 100%;
+          height: 98%;
+          background-color: #2b75c8;
+        }
+
+      }
+  
+    }
+    
+  }
+
+
+  // fin de barra de progreso
+
+  
+  
+  
+  
+}
+
+
+
+
+
+/*
+ SOLO FUNCIONA EN EL DESKTOP AL SER UN HOVER
+
+.skill-container::before,
+.skill-container::after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: inherit;
+  transition: all 0.5s ease-in;
+}
+
+.skill-container::before {
+  top: -15px;
+  left: -15px;
+  border-width: 3px 0 0 3px;
+}
+
+.skill-container::after {
+  bottom: -15px;
+  right: -15px;
+  border-width: 0 3px 3px 0;
+}
+
+.skill-container:hover::before,
+.skill-container:hover::after {
+  width: calc(100% + 27px);
+  height: calc(100% + 27px);
+}
+*/
+
+
+
+
+
+
+
+/*
+
+    TESTING 2 END
+
+*/

@@ -1,0 +1,113 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40vh;
+    width: 100%;
+
+    background: teal;
+}
+
+.innercontainer{
+    background-color: #074343;
+    height: 90%;
+    width: 90%;
+
+    .texto_container {
+        display: flex;
+        justify-content: space-evenly;
+        .icons {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            background: #07383869;
+            width: 80%;
+           
+            img {
+                cursor: pointer;
+                width: 38px;
+                height: 38px;
+            }
+        }
+    }
+
+    h2 {
+    padding: 8px;
+    color: bisque;
+    text-transform: uppercase;
+    }
+
+    h2::after {
+    content: "";
+    margin: 10px;
+    border: 1px solid blue;
+    }
+}
+
+/*
+.innercontainer_icons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: aqua;
+    height: 30%;
+    width: 100%;
+
+    .innercontainer_icons--icono1,
+     .innercontainer_icons--icono2 {
+        background-color: black;
+        height: 80%;
+        width: 20%;
+        border-radius: 50%;
+    }
+
+}
+*/
+
+.innercontainer_textos {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: #074343;
+    height: 70%;
+    width: 100%;
+}
+
+.innercontainer_textos--col1,
+.innercontainer_textos--col2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 45%;
+    height: 80%;
+
+    .innercontainer_textos--titulo {
+        height: 30%;
+        width: 100%;
+        color: cyan;
+        padding: 10px;
+    }
+
+    .innercontainer_textos--subtitulo {
+        height: 70%;
+        width: 100%;
+        padding: 10px;
+
+        ul > li > a {
+          color: darkcyan;
+        }
+    }
+}
+
+.innercontainer_textos--col1 {
+    background-color: #1a6262;
+}
+
+.innercontainer_textos--col2 {
+    background-color: #1a6262;
+}

@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+// importamos main donde tenemos mixins
+@import "../../../../assets/utilities/SCSS/main.scss";
+
+.colorrojo{
+  background-color: red;
+  color: blue;
+  font-size: 40px;
+}
+
+@mixin label-styles {
+  font-size: $--font-size / 1.65;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.065rem;
+}
+
+input:not(:focus) + button {
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+
+input:invalid + .not-empty-case {
+  opacity: 0;
+  pointer-events: none;
+  touch-action: none;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+.innercontainer {
+  display: grid;
+  place-items: center;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  padding: $--space-m;
+  font-size: $--font-size;
+  font-family: $--font-family;
+  line-height: 1.2;
+  background-color: $--color-tertiary;
+}
+
+a {
+  color: $--color-primary;
+  
+  &:focus {
+    color: $--color-secondary;
+  }
+}
+
+h2 {
+  font-weight: 700;
+  font-size: $--font-size * 1.5;
+}
+
+.form {
+  position: relative;
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
+  //transform: skewY(-5deg) translateY(10%) scale(0.94);
+  transition: 
+    box-shadow $--duration $--ease,
+    transform $--duration $--ease;
+  
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    background-color: darken(white, 8%);
+    width: 15%; //CAMBIAR VARIABLE PARA RESPONSIVE
+    height: 100%;
+    transition: 
+      background-color $--duration $--ease,
+      transform $--duration $--ease;
+  }
+  
+  &:before {
+    top: 0;
+    right: calc(100% - 1px);
+    transform-origin: 100% 100%;
+    transform: skewY(-35deg) scaleX(-1);
+    z-index: -1;
+  }
+  
+  &:after {
+    top: 0;
+    left: calc(100% - 1px);
+    transform-origin: 0 0;
+    transform: skewY(-35deg) scaleX(-1);
+    z-index: 2;
+  }
+  
+  &:hover,
+  &:focus-within {
+    transform: scale(1.0001);
+    box-shadow: 0 1rem 3rem rgba(black, 0.1);
+    
+    &:before,
+    &:after {
+      background-color: white;
+      transform: skewY(0);
+    }
+  }
+}
+
+.form-inner {
+  padding: $--space-xl;
+  background-color: white;
+  z-index: 1;
+
+  #titulo_login {
+    color: cornflowerblue;
+  }
+    
+  > * + * {
+    margin-top: $--space-xl;
+  }
+}
+
+.input-wrapper {
+  &:focus-within {
+    label {
+      color: $--color-secondary;
+    }
+    
+    .icon {
+      background-color: $--color-secondary;
+    }
+
+    input {
+      border-color: $--color-secondary;
+    }
+  }
+  
+  + .input-wrapper {
+    margin-top: $--space-l;
+  }
+}
+
+.input-group {
+  position: relative;
+
+  input {
+    border-radius: $--base-border-radius;
+    padding-left: calc($--space-s + 60px);
+  }
+  
+  .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-top-left-radius: $--base-border-radius;
+    border-bottom-left-radius: $--base-border-radius;
+    pointer-events: none;
+  }
+}
+
+label {
+  @include label-styles;
+  display: block;
+  margin-bottom: $--space-xs;
+  color: $--color-primary;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  flex: 0 1 auto;
+  padding: $--space-m;
+  background-color: $--color-primary;
+
+  svg {
+    width: 1.25em;
+    height: 1.25em;
+    fill: white;
+    pointer-events: none;
+    user-select: none;
+    transition: transform $--duration $--ease;
+  }
+}
+
+input {
+  flex: 1 1 0;
+  width: 100%;
+  outline: none;
+  padding: $--space-m;
+  font-size: $--font-size;
+  font-family: $--font-family;
+  color: $--color-secondary;
+  border: 2px solid $--color-primary;
+  
+  &:focus {
+    color: $--color-primary;
+  }
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  > * + * {
+    margin-left: $--space-s;
+  }
+}
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: none;
+  padding: $--space-m $--space-l;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: $--base-border-radius;
+}
+
+.btn--primary {
+  @include label-styles;
+  background-color: $--color-primary;
+  border-color: $--color-primary;
+  color: white;
+  
+  &:focus {
+    background-color: $--color-secondary;
+    border-color: $--color-secondary;
+  }
+}
+
+.btn--text {
+  font-size: $--font-size / 1.5;
+  padding: 0;
+}

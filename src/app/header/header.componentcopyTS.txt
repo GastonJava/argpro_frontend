@@ -1,0 +1,485 @@
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { filter, map, switchMap } from 'rxjs/operators';
+import { EsadminService } from '../share/services/esadmin.service';
+import { ImagestorageService } from '../share/services/imagestorage.service';
+import { LocalstorageService } from '../share/services/localstorage.service';
+import { ModalService } from '../share/services/modal/ismodalopen.service';
+import { ModalComponent } from '../usuarioform/modal/component/modal.component';
+import { ImagenService } from '../_services/imagen.service';
+
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
+})
+export class HeaderComponent implements OnInit {
+
+  //ismodalopen$: Observable<boolean>;
+  navbarimage: boolean;
+
+  base64: any;
+
+
+  simpleFile: File;
+
+  public ismodalopen: boolean;
+
+
+  ESADMIN: String;
+
+  asyncimage: Observable<any>;
+
+  base64imagen: string;
+
+  base64imagenbyte: any;
+
+  estalogueado: boolean;
+
+  perfilimagen: String;
+
+  //nombre de usuario
+  nombreusuario: String;
+
+  constructor(
+    private dialog: MatDialog,
+    public _ismodalopen: ModalService,
+    private esadminservice: EsadminService,
+    private localStorage: LocalstorageService,
+    private imagenservice: ImagenService,
+    private localStorageImage: ImagestorageService
+  ) {
+
+    this._ismodalopen.currentValue.subscribe(message => console.log(`subcripcion: esta modal abierto?: ${this.ismodalopen = message}`)); //subscribe to the currentValue observable.
+    //this.ismodalopen$ = this._ismodalopen.currentValue.pipe(map(state => state));
+  }
+
+  ngOnInit() {
+
+    //get image on init
+    //this.imagenservice.getimage();
+
+    //TRAEMOS LA IMAGEN AL CARGAR COMPONENTE
+    this.TraerPersonaImagen();
+  
+
+    //si el token existe
+    this.TraerUsuarioToken();
+    //console.log("funciona o no funciona " + this.estalogueado);
+
+    //ES ADMIN ???? 
+    this.TraerUsuarioRole();
+
+    this.localStorage.currentUser$.subscribe((logueado) => {
+
+      if (logueado == "" || logueado == null) {
+        //this.estalogueado = false - - -- - - - - ; 
+
+        this.localStorage.setStorageEstalogueado("eslogin", false);
+        this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin");
+
+        this.localStorage.setStorageRole("role", "USUARIO");
+        this.ESADMIN = this.localStorage.getStorageRole("role");
+
+
+        debugger
+
+
+        //this.localStorage.clearStorage();
+
+        //CUANDO ESTE SIN TOKEN NO LOGUEADO
+      } else {
+        this.localStorage.setStorageEstalogueado("eslogin", true);
+        this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin");
+
+        this.localStorage.setStorageRole("role", "ADMIN");
+        this.ESADMIN = this.localStorage.getStorageRole("role");
+
+        //this.estalogueado = true;
+
+      }
+
+    });
+
+    //escuchamos los datos del usuario nombre email e imagen
+    this.localStorage.currentUserData$.subscribe((data) => {
+      //console.log("el dato NOMBRE en el header del nginit y del currentUserData es: "+data.nombre);
+      this.nombreusuario = data.nombre;
+    });
+
+    //escuchamos la imagen del usuario
+    this.imagenservice.perfilUserImage$.subscribe((imagen) => {
+      this.perfilimagen = imagen;
+    });
+
+
+    this.base64imagenbyte = this.localStorageImage.getStorageimages("updateImagePreview"); 
+
+    this.localStorageImage.changeImageValue(this.base64imagenbyte);
+
+    //traemos la imagen de del observable this.base64imagen =  
+    this.asyncimage = this.localStorageImage.currentImage$.pipe(map(data => data));
+
+  }
+
+  TraerPersonaImagen(){
+
+   return this.imagenservice.getimage().pipe(map(data => {
+       
+      this.base64 = 'data:image/jpg;base64,' + data.imagenbyte;
+            
+      this.localStorageImage.setStorageImages("updateImagePreview", this.base64);
+      this.localStorageImage.changeImageValue(this.base64);
+
+    })).subscribe(); 
+
+  }
+
+  TraerUsuarioToken(){
+
+    if (this.localStorage.getStorage("token")) {
+
+      this.localStorage.setStorageEstalogueado("eslogin", true);
+      this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin");
+
+      if (this.localStorage.getStorageRole("role") == "ADMIN") {
+
+        this.localStorage.setStorageRole("role", "ADMIN");
+        this.ESADMIN = this.localStorage.getStorageRole("role");
+
+      }
+    }
+
+    if (!this.localStorage.getStorage("token")) {
+      this.localStorage.setStorageEstalogueado("eslogin", false);
+      this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin");
+
+      this.localStorage.setStorageRole("role", "USUARIO");
+      this.ESADMIN = this.localStorage.getStorageRole("role");
+
+    }
+
+  }
+
+  TraerUsuarioRole(){
+    this.esadminservice.currentValue.subscribe((data) => {
+      //this.esadmin = data;
+      console.log("es admin en SOBREMI - oninit: " + data);
+    });
+  }
+
+  ngAfterViewInit() {
+    //console.log("is VALID???: "+this.ismodalopen$);
+    //this.ismodalopen$ = this._ismodalopen._ismodalopen.pipe(map(state => state));
+    //this.ismodalopen$ = this._ismodalopen._ismodalopen.asObservable();
+    //console.log("true o false?: "+this.ismodalopen$.pipe(filter(state => state)));
+  }
+
+  //abrir dialogo modal al presionar boton (editar texto)
+  openDialog(): void {
+
+    this._ismodalopen.changeValue(true);
+    this.dialog.open(ModalComponent, {
+      disableClose: true,
+      panelClass: ['app-full-bleed-dialog', 'mat-dialog-container'],
+      width: '100%',
+      data: {
+      }
+    })
+  }
+
+  onSave($event) {
+    console.log("save . . . ");
+
+    if (this.ESADMIN) {
+
+      this.simpleFile = $event.target.files[0];
+
+      let imageFormData = new FormData();
+
+      imageFormData.append('file', this.simpleFile);
+
+      //this.imagenservice.uploadimg(); -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+      //const result = this.imagenservice.uploadimg(imageFormData);
+
+      this.imagenservice.uploadimg(imageFormData).subscribe(
+        (data) => {
+          console.log((<any>data).imagenbyte);
+
+          const previewBase64 = (<any>data).imagenbyte;
+
+          this.base64 = 'data:image/jpg;base64,' + previewBase64;
+
+          //es necesario guardarlo en el localstorage
+
+          debugger
+
+
+          /*
+
+          if(previewBase64){
+
+
+            //guardamos la imagen en un localstorage
+            //this.localStorageImage.setStorageImages("saveImagePreview", previewBase64);
+            setTimeout(() => {
+              
+              this.imagenservice.getimage(previewBase64).subscribe(
+                (base64) => {
+  
+                  const imageBase64 = (<any>base64)
+
+                  if(imageBase64){
+                    this.localStorageImage.setStorageImages("saveImagePreview", imageBase64);
+                    this.localStorageImage.changeImageValue(imageBase64);
+                    console.log("QUE NOS TRAE IMAGENNN"+imageBase64);
+                  }
+                
+                },
+                (error) => {console.log("ERROR: "+error);}
+                
+              );
+
+
+            }, 2000);
+
+           
+            //this.localStorageImage.changeImageValue(previewBase64);
+          }
+
+          */
+
+
+
+        },
+        (error) => {
+          console.log(error);
+        },
+        
+
+
+      );
+    }
+
+  }
+
+  onUpdate($update) {
+    console.log("update . . .");
+
+    if (this.ESADMIN) {
+
+      this.simpleFile = $update.target.files[0];
+
+      let imageFormData = new FormData();
+
+      imageFormData.append('file', this.simpleFile);
+
+      //this.imagenservice.uploadimg(); -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+      //const result = this.imagenservice.uploadimg(imageFormData);
+
+      this.imagenservice.actualizarimg(imageFormData).pipe(
+        map(
+          (data) => {
+
+            const previewBase64 = (<any>data).imagenbyte;
+
+            this.base64 = 'data:image/jpg;base64,' + previewBase64;
+            
+            this.localStorageImage.setStorageImages("updateImagePreview", this.base64);
+            this.localStorageImage.changeImageValue(this.base64);
+
+          },
+          (error: any) => {console.log(error)}
+       )).subscribe();
+    }
+
+  }
+
+  //al borrar imagen
+  onDelete($delete) {
+    console.log("delete . . .");
+  }
+
+
+  subirImagen() {
+    return
+
+
+  }
+
+  cerrarsession() {
+    console.log("token en header: " + this.localStorage.getStorage("token"));
+    console.log("esta logueado en header: " + this.localStorage.getStorage("eslogin"));
+
+    this.localStorage.eliminarStorage("token");
+    this.localStorage.setStorageEstalogueado("eslogin", false);
+    //this.localStorage.setStorageRole("role", "USUARIO");
+    this.localStorage.eliminarStorage("role");
+    console.log("como.c..c.c.c.......ccccc : " + this.localStorage.eliminarStorage("role"));
+    this.localStorage.clearStorage();
+
+
+
+
+    //this.localStorage.clearStorage();
+
+    this.localStorage.changeTokenValue(null);
+
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.localStorage.currentUserToken$.subscribe((token) => { //  -------------------------------------------------------------------------- NO ENTRA AL ACTUALIZAR
+
+        
+      debugger
+      console.log("entra no entra??????????????");
+      if (token == "" || token == null) {
+        //this.estalogueado = false - - -- - - - - ; 
+
+        //this.localStorage.setStorageEstalogueado("eslogin", false); --------------------------------------------------------------------------
+        //this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin"); -------------------------------------------------------------
+
+        //this.localStorage.changeLogueadoValue(false);
+        this.estalogueado = false;
+      
+
+
+        this.localStorage.setStorageRole("role", "USUARIO");
+        this.ESADMIN = this.localStorage.getStorageRole("role");
+
+
+        //this.localStorage.clearStorage();
+
+        //CUANDO ESTE SIN TOKEN NO LOGUEADO
+      } else {
+        //this.localStorage.setStorageEstalogueado("eslogin", true); ---------------------------------------------------------------------------
+        //this.estalogueado = this.localStorage.getStorageEstalogueado("eslogin"); -------------------------------------------------------------
+
+        this.localStorage.changeLogueadoValue(true);
+        this.estalogueado = true;
+        debugger
+
+        this.localStorage.setStorageRole("role", "ADMIN");
+        this.ESADMIN = this.localStorage.getStorageRole("role");
+
+        //this.estalogueado = true;
+
+      }
+
+    });

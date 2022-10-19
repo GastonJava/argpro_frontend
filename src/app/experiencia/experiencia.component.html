@@ -1,0 +1,407 @@
+
+<h1>{{ ESADMIN }}</h1>
+
+<div class="all">
+
+  <div class="wave-contenedor">
+    <div class="custom-shape-divider-top-1647453293">
+      <!-- imagen tres lineas-->
+      <div class="img-lineas">
+        <img
+          data-aos="flip-left"
+          data-aos-easing="ease-out-cubic"
+          data-aos-duration="2000"
+          src="assets/utilities/treeline-white.svg"
+          alt="tres lineas"
+        />
+      </div>
+
+      <svg
+        data-name="Layer 1"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+          class="shape-fill"
+        ></path>
+      </svg>
+    </div>
+  </div>
+
+   <!--
+   <div class="custom-shape-divider-bottom-1647393674">
+
+    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+    </svg>
+
+   </div>
+   -->
+
+    <div data-aos="fade-down" data-aos-duration="2500" class="titulo">
+
+    <ng-container *ngIf="showtitulo; then guardarfalse; else editartrue"></ng-container>
+
+    <!--INPUT PARA EL TITULO -->
+    <input
+    *ngIf="ESADMIN == 'ADMIN' && showtitulo"
+    formControlName="titulo"
+    [readonly]="false"
+    type="text"/>
+
+    <p *ngIf="!showtitulo">{{titulomessage}}</p>
+
+    <ng-template #guardarfalse>
+
+      <i
+      (click)="saveTitulo()"
+      (click)="showtitulo = !showtitulo"
+      *ngIf="ESADMIN == 'ADMIN'"
+      class="bx bxs-save icon2">
+      </i>
+
+      <i
+      (click)="showtitulo = !showtitulo"
+      *ngIf="ESADMIN == 'ADMIN'"
+      (click)="cerrartitulo()"
+      class='bx bx-arrow-back'>
+      </i>
+
+    </ng-template>
+
+     <ng-template #editartrue>
+
+      <i
+      *ngIf="ESADMIN == 'ADMIN' && !showtitulo"
+      class="bx bx-edit-alt icon3"
+      (click)="showtitulo = !showtitulo"
+      #editar>
+      </i>
+
+     </ng-template>
+
+      <!-- LOG IN -->
+      <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit1' (click)="clickcard(i)"></i>
+   </div>
+
+   <div class="cards">
+
+    <div *ngIf="ESADMIN == 'ADMIN'" class="btn-admin">
+      <i class='bx bx-window-close icon-edit3' (click)="deletecards()"></i>
+      <i *ngIf="!showcardinput" class="bx bxs-save nuevacard" (click)="showcardinput = !showcardinput"></i>
+      <i *ngIf="showcardinput" class="bx bx-arrow-back nuevabackcard" (click)="showcardinput = !showcardinput"></i>
+    </div>
+
+    <h1>el showcardinut es: {{showcardinput}}</h1>
+
+    <ng-template [ngIf]="showcardinput">
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="crearnuevacardsubmit()"
+      class="form"
+      onsubmit="return false"
+      autocomplete="off"
+      >
+    
+      <label for="tiulocard">Ingresar Titulo card</label>
+      <input type="text" formControlName="titulocard" id="titulocard">
+      <span></span>
+
+      <label for="subtitulocard">Ingresar Subtitulo card</label>
+      <input type="text" formControlName="subtitulocard" id="subtitulocard">
+
+      <label for="imagencard">Ingresar Imagen card</label>
+      <input
+      (change)="subirimagen($event)"
+      type="file"
+      accept="image/*"
+      formControlName="imagencard"
+      id="imagencard" />
+
+
+
+      <button>Crear Nuevo Card</button>
+    
+    </form>
+
+
+    <!--<img *ngIf="imagecardPreviewts.length > 40" class="imagenpreview" [src]="imagecardPreviewts" alt="imagen de preview">-->
+
+   </ng-template>
+
+    <!-- fffffffffffffffffffff -->
+    <cdk-virtual-scroll-viewport itemSize="400" class="card shadow-1 card1">
+   
+  
+    <!-- <img [src]="cardlistdatabase.imagencardString" /> -->
+   
+    <mat-card *cdkVirtualFor="let cardlist of cardlistdatabase, 
+      let i = index;
+      let par = even;
+      let impar = odd; 
+      "[ngClass]="{backgroundPar: par, backgroundImpar:impar}"
+      >
+
+      <!--CERRAR CARD -->
+      <i class='bx bx-window-close cerrarcard' (click)="borrarcardporid(cardlist.id)"></i>
+
+      <form 
+      [formGroup]="formcardedit"
+      (ngSubmit)="actualizarcardsubmit()"
+      class="form"
+      autocomplete="off">
+
+        <mat-card-title class="card-title">
+
+          <p *ngIf="!showinsidecardtitulo" data-aos="fade-right" data-aos-duration="2900">
+            {{cardlist.titulo}}
+          </p>
+
+          <input *ngIf="showinsidecardtitulo" type="text" formControlName="tituloeditcard" id="titulocardedit">
+  
+          <!-- LOG IN -->
+          <ng-template [ngIf]="ESADMIN == 'ADMIN'">
+            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="!showinsidecardtitulo" class='bx bxs-edit-alt icon-edit2 editar '></i>
+            <i (click)="ActualizarTitulo(cardlist.id)" *ngIf="showinsidecardtitulo" (click)="showinsidecardtitulo = !showinsidecardtitulo" class="bx bxs-save icon-edit3 guardar"></i>
+            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="showinsidecardtitulo" class='bx bx-window-close icon-edit3 cerrar' (click)="clickcard(cardlist.id)"></i>
+          </ng-template>
+          
+  
+        </mat-card-title>
+  
+        <mat-card-subtitle class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
+  
+          <p *ngIf="!showinsidecardsubtitulo" id="p">
+            {{cardlist.subtitulo}}
+          </p>
+          <input *ngIf="showinsidecardsubtitulo" type="text" formControlName="subtituloeditcard" id="subtitulocardedit">
+  
+          <!-- LOG IN -->
+          <ng-template [ngIf]="ESADMIN == 'ADMIN'">
+            <i *ngIf="!showinsidecardsubtitulo" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class='bx bx-edit icon-edit3 editar' (click)="clickcard(cardlist.id)"></i>
+            <i *ngIf="showinsidecardsubtitulo" (click)="ActualizarSubtitulo(cardlist.id)" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class="bx bxs-save icon-edit3 guardar" ></i>
+            <i (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" *ngIf="showinsidecardsubtitulo" class='bx bx-window-close icon-edit3 cerrar' (click)="clickcard(cardlist.id)"></i>
+          </ng-template>
+          
+  
+        </mat-card-subtitle>
+  
+        <mat-card-content class="card-img" data-aos="fade-down" data-aos-duration="2000">
+  
+          <div class="container-img">
+  
+            <img
+              *ngIf="!showinsidecardimg"
+              mat-card-image
+              [src]="('data:image/jpg;base64,' + cardlist.imagencardString)"
+              intrinsicsize="200x90"
+              alt="imagen exp"
+            />
+
+           
+      
+
+            <!-- <p>{{cardlist[i].imagencard}}</p> [src]="cardlist[i].imagencard"-->
+
+           <!-- <img [src]="imagecardPreviewts" alt="imagene debe mostarse"> -->
+  
+            <!-- LOG IN -->
+            <ng-template [ngIf]="ESADMIN == 'ADMIN'">
+
+              <input
+              (change)="ActualizarImg(cardlist.id ,$event)"
+              type="file"
+              accept="image/*"
+              formControlName="editarimagencard"
+              id="subirimagencard" />
+              
+            </ng-template>
+  
+          </div>
+          
+        </mat-card-content>
+
+        
+        <!-- BOTTON DEL SUBMIT INSIDE CARDS -->
+        <button>Actualizar cards</button>
+
+        
+      </form>
+
+      </mat-card>
+
+    </cdk-virtual-scroll-viewport>
+ 
+    <!-- fffffffffffffffffffff -->
+
+    <!--
+    <div *ngFor="let cardlist of cardslist, let i = index" class="card shadow-1 card1">
+
+      <div class="card-title">
+
+        <p data-aos="fade-right" data-aos-duration="2900">
+          {{cardlist.title}}
+        </p>
+
+        LOG IN 
+        <i *ngIf="login" class='bx bxs-edit-alt icon-edit2' (click)="clickcard(i)"></i>
+
+      </div>
+
+      <div class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
+
+        <p>
+          {{cardlist.subtitle}}
+        </p>
+
+        LOG IN
+        <i *ngIf="login" class='bx bx-edit icon-edit3' (click)="clickcard(i)"></i>
+
+      </div>
+
+      <div class="card-img" data-aos="fade-down" data-aos-duration="2000">
+
+        <div class="container-img">
+
+          <img
+            src="{{cardlist.url}}"
+            intrinsicsize="200x90"
+            alt="imagen exp"
+          />
+
+          LOG IN
+          <i *ngIf="login" class='bx bx-edit icon-edit4' (click)="clickcard(i)"></i>
+
+        </div>
+        
+      </div>
+
+    </div>
+    -->
+
+    <!--
+    <div *ngFor="let cardlist of cardslist" class="card shadow-1 card2">
+      <div class="card-title">
+        <p data-aos="fade-right" data-aos-duration="2900">{{cardlist.title}}</p>
+      </div>
+
+      <div class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img" data-aos="fade-down" data-aos-duration="2000">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card3">
+      <div class="card-title">
+        <p>Experiencia numero 2</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card4">
+      <div class="card-title">
+        <p>Experiencia numero 3</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card5">
+      <div class="card-title">
+        <p>Experiencia numero 4</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card6">
+      <div class="card-title">
+        <p>Experiencia numero 5</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card7">
+      <div class="card-title">
+        <p>Experiencia numero 6</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+
+    <div class="card shadow-1 card8">
+      <div class="card-title">
+        <p>Experiencia numero 7</p>
+      </div>
+
+      <div class="card-parrafo">
+        <p>
+          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
+          personajes junto a su imagen.
+        </p>
+      </div>
+
+      <div class="card-img">
+        <img src="" alt="imagen exp" />
+      </div>
+    </div>
+   -->
+
+  </div>
+</div>

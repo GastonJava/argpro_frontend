@@ -1,0 +1,115 @@
+@import '../../assets/utilities/footer/colores';
+@import '../../assets/utilities/SCSS/main.scss';
+
+section { 
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  height: 60px;
+  width: 100%;
+  bottom: -10px;
+  z-index: 1000;
+  background: $--footer-bg-icon-education;
+  border-radius: 4rem 4rem 0rem 1rem / 4rem 4rem 0rem 1rem;
+
+  @include rwd(600){
+    height: 80px;
+  }
+}
+
+p {
+  color: white;
+}
+
+.sobremi,
+.experiencia,
+.educacion,
+.proyecto,
+.hardsoft {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  width: 18%;
+}
+
+//=== IMAGEN
+.containerimg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $--footer-bg-noselected-circle;
+  border-radius: 50%;
+  width: 85%;
+  height: 90%;
+
+  img {
+    width: 48px;
+    height: 40px;
+  }
+}
+
+////background icons containers
+.bgiconcontainer_sobre,
+.bgiconcontainer_exp,
+.bgiconcontainer_edu,
+.bgiconcontainer_proj,
+.bgiconcontainer_softs {
+  transition: all 1s;
+}
+
+//background icons container
+.bgiconcontainer_sobre {
+  background-color: $--footer-bg-icon-sobremi;
+}
+
+.bgiconcontainer_exp {
+ background-color: $--footer-bg-icon-experiencia;
+}
+
+.bgiconcontainer_edu {
+  background-color: $--footer-bg-icon-education;
+}
+
+.bgiconcontainer_proj {
+  background-color: $--footer-bg-icon-proyecto;
+}
+
+.bgiconcontainer_softs {
+  background-color: $--footer-bg-icon-softskill;
+}
+
+//background icons
+.bgtransparent {
+  transition: all 1.8s;
+  background-color: $--footer-bg-noselected-circle;
+}
+
+.bgoscuro {
+  transition: all 1.8s;
+  background-color: $--footer-bg-selected-circle;
+}
+
+
+
+// sobremi
+.sobremi {
+  //background: pink;
+}
+
+.experiencia {
+  //background: red;
+}
+
+.educacion {
+  //background: white;
+}
+
+.proyecto {
+  //background-color: black;
+}
+
+.hardsoft {
+  //background: blue;
+}

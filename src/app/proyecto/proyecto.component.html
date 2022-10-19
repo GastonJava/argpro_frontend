@@ -1,0 +1,233 @@
+<section class="container">
+  <div class="container-header">
+
+    <div class="proy-container">
+      <h2>Proyectos</h2>
+
+      <i *ngIf="esadmin == 'ADMIN'" class='bx bx-edit-alt icon-edit1' (click)="clickcard(i)"></i>
+
+    </div>
+   
+  </div>
+
+  <div class="container-middle">
+    <div class="cards">
+      <div class="wrapper" *ngFor="let card of cards; let i = index">
+        <div
+          class="card"
+          (dblclick)="mi_status(i)"
+          [ngClass]="open[i] ? 'cardtouched' : 'cardno_touched'"
+        >
+          <!--(click)="cardClick()" -->
+
+          <div class="container-img">
+
+            el login aqui es? --- {{isLogin}}
+
+            <img
+              [ngClass]=" islogin ? 'opacidad-imgcard-login' : 'opacidad-imgcard-logout'"
+              class="card-image"
+              src="{{ card.image }}"
+              alt="supuesta img"
+              loading="lazy"
+            />
+
+            <!-- icono editar para cuando estamos logueados -->
+            <i *ngIf="esadmin == 'ADMIN'" class='bx bx-edit-alt icon-edit2' (click)="clickcard(i)"></i>
+
+          </div>
+
+          <div class="card-description">
+            <!-- LOG-OUT-->
+            <div class="logout" *ngIf="!isLogin; else login">
+              <div class="title-container">
+
+                <p class="text-title">{{ card.title }}</p>
+
+                <!-- icono cuando esta LOGUEADO LOGIN -->
+                <!-- <i *ngIf="login" class='bx bx-edit-alt icon-edittitle' (click)="clickcard(i)"></i> -->
+
+                <i (click)="mi_status(i)" class='bx bxs-down-arrow icon-edittitle icon-flechaBajar'></i>
+
+              </div>
+
+              <div class="descripcion-container">
+
+                <div class="descripcion-container-p">
+
+                  <p class="text-body">
+                    {{ card.description }}
+                  </p>
+                  
+                </div>
+                
+              </div>
+            </div>
+            <!-- LOG-OUT -->
+
+            <!-- LOG-IN -->
+            <!-- Los tags aparecen al estar logueado -->
+
+              <ng-template class="bottom-container-tag" #login>
+
+                <div class="drag-container">
+                  <div class="section-heading">
+
+                    <mat-slide-toggle (change)="checkbox($event)">
+                      Editar tags 
+                    </mat-slide-toggle>
+
+                    <ng-container *ngIf="status ? 'btntag' : 'btntext'"></ng-container>
+
+                    <!-- icono de flecha abajo cuando esta LOGUEADO LOGIN -->
+                    <i (click)="mi_status(i)" [ngClass]="open[i] ? 'flechaup' : 'flechadown'" class='bx bxs-down-arrow icon-flechaBajar'></i>
+
+                  <ng-container *ngIf="!status">
+
+                    <button (click)="openDialog()"
+                    mat-raised-button
+                    class="common-button"
+                    color="accent" 
+                    >
+                      Editar Titulo
+                    </button>
+
+                  </ng-container>
+
+                  <ng-container *ngIf="status">
+
+                    <button
+                    mat-raised-button
+                    class="common-button"
+                    color="primary" 
+                    >
+                     Guardar tags
+                    </button>
+
+                  </ng-container>
+                   
+                  <app-dialog></app-dialog>
+                    
+                  </div>
+
+                  <!-- TITULO Y DESCRIPCION -->
+                  <div class="title-descr" *ngIf="isCheckbox">
+
+                    <div class="title-container">
+                      <p class="text-title">{{ card.title }}</p>
+                    </div>
+      
+                    <div class="descripcion-container">
+                      <p class="text-body">
+                        {{ card.description }}
+                      </p>
+                    </div>
+                    
+                  </div>
+
+                  <!-- TITULO Y DESCRIPCION -->
+
+                  <div
+                    id="mainlink"
+                    cdkDropList
+                    #maintag="cdkDropList"
+                    [cdkDropListData]="maintaglist"
+                    [cdkDropListConnectedTo]="['footerlink']"
+                    (cdkDropListDropped)="drop($event)"
+                    (cdkDropListExited)="exited($event)"
+                    [cdkDropListDisabled]="isCheckbox"
+                    class="item-list"
+                    *ngIf="!isCheckbox"
+                    >
+                    <!--(cdkDropListExited)="exited($event)"-->
+                    <div class="item-box" *ngFor="let item of maintaglist" cdkDrag>{{ item.value }}</div>                   
+
+                  </div>
+
+                </div>
+
+                <!-- la parte del footer tag -->
+                  <!-- AQUI VAN LOS TAGS -->
+            <div class="bottom-container">
+              <div
+               id="footerlink"
+               cdkDropList
+               #footertag="cdkDropList"
+               [cdkDropListData]="footertaglist"
+               [cdkDropListConnectedTo]="['mainlink']"            
+               (cdkDropListDropped)="drop($event)"
+               (cdkDropListExited)="exited($event)"
+               [cdkDropListDisabled]="isCheckbox"
+               class="tags"
+              >
+
+              <!---->
+
+              <div class="item-box" *ngFor="let item of footertaglist" cdkDrag>{{item.value}} 
+                <!-- [cdkDragDisabled]="item.disabled" --></div>
+
+              <!--
+               <p class="tag-rounded text-sm">{{ tags[i] }}</p>
+               <p class="tag-rounded text-sm">{{ tags[i] }}</p>
+               -->
+             </div>
+
+            </div>
+            <!-- AQUI VAN LOS TAGS -->
+
+             </ng-template> 
+              
+            
+            
+            <!-- fin de los tags -->
+            <!-- LOG-IN -->
+
+          
+          </div>
+        </div>
+      </div>
+
+      <!--
+      <div class="wrapper">
+        <div class="card" (dblclick)="mi_status(); $event.stopPropagation()"
+         [ngClass]="status ? 'cardtouched' : 'cardno_touched' ">
+          
+          <div class="container-img">
+            <img class="card-image" src="assets/proyecto/testing.jpg" alt="supuesta img">
+          </div>
+          
+          <div class="card-description">
+            <p class="text-title">Card Title</p>
+            <p class="text-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="card" (dblclick)="mi_status(); $event.stopPropagation()"
+         [ngClass]="status ? 'cardtouched' : 'cardno_touched' ">
+          <div class="container-img">
+            <img class="card-image" src="assets/proyecto/proyecttext2.png" alt="supuesta img">
+          </div>
+         
+          <div class="card-description">
+            <p class="text-title">Card Title</p>
+            <p class="text-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </p>
+          </div>
+        </div>
+      </div>
+     
+      -->
+    </div>
+
+  </div>
+
+  <div class="container-bottom">
+    <h1>ARGENTINA PROGRAMA</h1>
+  </div>
+
+</section>

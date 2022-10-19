@@ -1,0 +1,243 @@
+/*
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background: #2c7c7c;
+    height: 100vh;
+}
+
+.container-title {
+    text-align: center;
+}
+
+
+.container-skills1 {
+  
+}
+
+.mat-card {
+    background: #308e93;
+    color: rgba(90, 49, 49, 0.95);
+} 
+
+:host::ng-deep mat-card-content {
+    display: flex;
+    justify-content: space-evenly;
+
+    .progress1, .progress2, .progress3 {
+        width: 30%;
+    }
+}
+
+:host::ng-deep mat-progress-spinner{
+
+    svg {
+        width: 88px !important;
+        height: 80px !important;
+    }
+}
+
+*/
+
+/*
+
+    TESTING 1 START
+
+*/
+
+.skill {
+    background-color: #186672ab;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+  
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+  
+  .skill_title {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    flex-direction: row;
+    width: 50%;
+  
+    h2 {
+      color:#02e8e09c;
+    }
+  
+    .edit-icon1 {
+      //position: absolute;
+      //right: 10px;
+      //top: 20px;
+      cursor: pointer;
+      color: burlywood;
+      font-size: 30px;
+    }
+  
+  }
+  
+  .skill-container-height {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 80%;
+    width: 98%;
+    background-color: #52576500;
+  
+    .icon_edit {
+      cursor: pointer;
+      font-size: 22px;
+      color: gainsboro;
+    }
+  }
+  
+  .skill-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    //border: 1px solid #1f366bc4;
+  
+    width: 90%;
+    height: 80%;
+    
+    background-color: #0b7eeb24;
+  
+    border: 1px solid #79ebbc;
+    border-radius: 20px;
+  
+    .title_container {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-direction: row;
+      width: 70%;
+      height: 90%;
+  
+      h2 {
+        width: 50%;
+        color: #154c48;
+      }
+  
+    }
+    
+    .outer_container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30%;
+      height: 90%;
+  
+      .outer {
+        height: 50%;
+        width: 25%;
+        border-radius: 50%;
+        padding: 20px;
+        /*
+        box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 1.5),
+          -6px -6px 10px -1px rgba(255, 255, 255, 0.7); 
+        
+         */
+        box-shadow: 6px 6px 10px -1px black, 
+        -5px -6px 14px -10px
+         rgb(255 255 255 / 70%);
+  
+      }
+      
+      .inner {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: inset 4px 4px 6px -1px rgba(0, 0, 0, 0.2),
+        inset -4px -4px 6px -1px rgba(255, 255, 255, 0.7),
+        -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+        0.5px 0.5px 0px rgba(0, 0, 0, 0.15), 0px 12px 10px -10px rgba(0, 0, 0, 0.05);
+  
+        #number {
+          font-weight: 600;
+          color: #02e8e09c;
+        }
+          
+        circle {
+          fill: none;
+          stroke: url(#GradientColor);
+          stroke-width: 20px;
+          stroke-dasharray: 472;
+          stroke-dashoffset: 472;
+          animation: anim 2s linear forwards;
+        }
+          
+        .html-circle-skill {
+          position: absolute;
+          top: 0%;
+          left: 0%;
+        }
+          
+        @keyframes anim {
+          100% {
+            stroke-dashoffset: 165;
+          }
+        }
+      }
+    }
+    
+  }
+  
+  
+  
+  
+  
+  /*
+   SOLO FUNCIONA EN EL DESKTOP AL SER UN HOVER
+  
+  .skill-container::before,
+  .skill-container::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: inherit;
+    transition: all 0.5s ease-in;
+  }
+  
+  .skill-container::before {
+    top: -15px;
+    left: -15px;
+    border-width: 3px 0 0 3px;
+  }
+  
+  .skill-container::after {
+    bottom: -15px;
+    right: -15px;
+    border-width: 0 3px 3px 0;
+  }
+  
+  .skill-container:hover::before,
+  .skill-container:hover::after {
+    width: calc(100% + 27px);
+    height: calc(100% + 27px);
+  }
+  */
+  
+  
+  
+  
+  
+  
+  
+  /*
+  
+      TESTING 2 END
+  
+  */
+  

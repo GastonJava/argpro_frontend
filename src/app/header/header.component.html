@@ -1,0 +1,132 @@
+<div class="background" [ngClass]="ismodalopen ? 'displaynone' : 'displayflex'">
+  <section class="sectionlogo">
+    <div class="innerlogo">
+      <img src="assets/header/APLogo-20-20.png" alt="logo" />
+    </div>
+  </section>
+
+  <section class="sectionpicture">
+    <app-file-upload
+      class="input-field"
+      id="img"
+      (change)="onSave($event)"
+      name="imagen"
+      *ngIf="ESADMIN == 'ADMIN' && imageid == null"
+    >
+      <!-- *ngIf="ESADMIN == 'ADMIN' && !(asyncimage | async)"    *ngIf="agregarBtn"-->
+    </app-file-upload>
+
+    <app-file-update
+      (change)="onUpdate($event)"
+      *ngIf="ESADMIN == 'ADMIN' && imageid != null"
+    >
+    </app-file-update>
+    <!-- *ngIf="ESADMIN == 'ADMIN' && logueado == 'SILOGUEADO'"   *ngIf="actualizarBtn"-->
+
+    <app-file-delete
+      (click)="onDelete()"
+      *ngIf="ESADMIN == 'ADMIN' && imageid != null"
+    >
+    </app-file-delete>
+    <!-- *ngIf="ESADMIN == 'ADMIN' && logueado == 'NOLOGUEADO'" *ngIf="eliminarBtn" -->
+
+    <!--
+    <h3 *ngIf="logueado == 'SILOGUEADO'"> 
+      <pre><h5>ESTA LOGUEADO:</h5> estas logueado</pre>
+    </h3>
+
+    <h3 *ngIf="logueado == 'NOLOGUEADO'">
+      <pre><h5>ESTA LOGUEADO:</h5> no estas logueado</pre>
+    </h3>
+-->
+
+    <!--  AQUI APARECE LA IMAGEN DEL PERFIL -->
+    <div class="innerpicture">
+      <div class="contenedor">
+        <img
+          *ngIf="imageid == null"
+          src="assets/header/img-perfil.png"
+          alt="avatar usuario"
+        />
+
+        <img *ngIf="imageid != 0" [src]="asyncimage | async" />
+        <!--src="assets/header/gastonavatar.jpeg"-->
+
+        <!--<i *ngIf="esadmin == 'ADMIN' && estalogueado;" type="file" class='bx bx-log-out'></i> *ngIf="esadmin == 'ADMIN' && estalogueado;"-->
+        <!-- <input *ngIf="esadmin == 'ADMIN' && estalogueado;" type="file" (click)="onChange($event)" class="input-field"> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="sectionsociales">
+    <h3>
+      <pre><h5>ROL ES: </h5>{{ESADMIN}}</pre>
+    </h3>
+
+    <div class="iconos">
+      <div class="p-container">
+        <div class="bienvenidocontainer">
+          <button
+            [disabled]="ismodalopen"
+            *ngIf="logueado == 'NOLOGUEADO'"
+            class="titulo"
+            (click)="openDialog()"
+          >
+            Iniciar Session
+          </button>
+
+          <button
+            [disabled]="false"
+            *ngIf="logueado == 'SILOGUEADO'"
+            class="titulo"
+            (click)="cerrarsession()"
+          >
+            Cerrar Session
+          </button>
+          <!--*ngIf="estalogueado" *ngIf="logueado != ''"   *ngIf="asynclogueado | async"-->
+        </div>
+
+        <div class="containeruserlogo">
+          <div class="usuariocontainer">
+            <p *ngIf="estalogueado" class="username">
+              Bienvenido: {{ nombreusuario }}
+            </p>
+          </div>
+
+          <div class="img-container">
+            <img
+              *ngIf="false"
+              src="assets/header/sociales/bxl-linkedin-square.png"
+              alt="linkedin logo"
+            />
+            <i *ngIf="false" class="bx bx-log-out"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="sectionpictureusuario"
+    *ngIf="ESADMIN == 'ADMIN' && logueado == 'SILOGUEADO'"
+  >
+    <div class="innerpictureusuario">
+      <img
+        type="file"
+        *ngIf="!perfilimagen"
+        src="assets/header/img-perfil.png"
+        alt="avatar usuario"
+      />
+      <!--  -->
+
+      <img *ngIf="perfilimagen" [src]="perfilimagen" alt="avatar usuario" />
+      <!--src="assets/header/gastonavatar.jpeg"-->
+      <i
+        class="bx bx-edit-alt icon2"
+        *ngIf="ADMIN == 'ADMIN' && estalogueado"
+      ></i>
+    </div>
+  </section>
+</div>
+
+<hr />

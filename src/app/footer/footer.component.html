@@ -1,0 +1,50 @@
+<section 
+[ngClass]="[toggle === 'sobre' ? 'bgiconcontainer_sobre' : '',
+toggle === 'exp' ? 'bgiconcontainer_exp' : '',
+toggle === 'edu' ? 'bgiconcontainer_edu' : '',
+toggle === 'proj' ? 'bgiconcontainer_proj' : '',
+toggle === 'softs' ? 'bgiconcontainer_softs' : ''
+]">
+
+    <div class="sobremi" (click)="iconclick('sobre')" (click)="toggle = 'sobre'"> <!-- (click)="dioClick.emit()" (click)="iconclick('sobre')" -->
+        <div  class="containerimg containerimg-sm" 
+        [ngClass]="toggle === 'sobre' ? 'bgoscuro' : 'bgtransparent'">
+            <img src="assets/footer/icono_mi2.png"
+             alt="sobremi icon">
+             
+        </div>
+    </div>
+
+    <div class="experiencia" (click)="iconclick('exp')" (click)="toggle = 'exp'"> <!-- (click)="dioClick.emit()"  (click)="iconclick('exp')" -->
+        <div class="containerimg containerimg-exp"
+        [ngClass]="toggle === 'exp' ? 'bgoscuro' : 'bgtransparent'">
+            <img src="assets/footer/icono_exp4.png"
+             alt="exp icon">
+        </div>
+    </div>
+
+    <div class="educacion" (click)="iconclick('edu')" (click)="toggle = 'edu'">
+        <div class="containerimg containerimg-edu"
+        [ngClass]="toggle === 'edu' ? 'bgoscuro' : 'bgtransparent'">
+            <img src="assets/footer/icono_edu2.png"
+             alt="edu icon">
+        </div>
+    </div>
+
+    <div class="proyecto" (click)="iconclick('proj')" (click)="toggle = 'proj'">
+        <div class="containerimg containerimg-proj"
+        [ngClass]="toggle === 'proj' ? 'bgoscuro' : 'bgtransparent'">
+            <img src="assets/footer/icono_proj.png"
+            alt="proyecto icon">
+        </div>
+    </div>
+
+    <div class="hardsoft" (click)="iconclick('hardsoft')" (click)="toggle = 'hardsoft'">
+        <div class="containerimg containerimg-softs"
+        [ngClass]="toggle === 'hardsoft' ? 'bgoscuro' : 'bgtransparent'">
+            <img src="assets/footer/icono_soft.png"
+             alt="hardsoft icon">
+        </div> 
+    </div>
+
+</section>

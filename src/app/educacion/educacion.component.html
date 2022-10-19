@@ -1,0 +1,528 @@
+<section class="container">
+  <div id="texto-medio" class="toplader-container">
+   <!--  <h2>SECCION DE EDUCACION</h2> -->
+
+    <div class="imgedu" data-aos="fade-left" data-aos-duration="1400">
+      <img class="img1" src="assets/educacion/profeducation.png" alt="profe png" />
+    </div>
+
+    <div class="images">
+      <div class="container-imagenes-education">
+
+        <!-- 
+
+            <div class="imgedu">
+          <img class="img1" src="assets/educacion/ideaedu.png" alt="light png" />
+        </div>
+
+         <div class="imgedu">
+          <img class="img3" src="assets/educacion/stairducation.png" alt="stair png" />
+        </div>
+        -->
+       
+      </div>
+    </div>
+
+    <div class="toplader" data-aos="fade-right" data-aos-duration="1500">
+
+      <div class="textoinsider">
+        <h2>
+          <small>Mi educacion</small>
+        </h2>
+      </div>
+
+      <div class="custom-shape-divider-top-1648083770">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            class="shape-fill"
+          ></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="educacion-portal"></div>
+
+    <div class="titulo-small">
+
+      <!--
+      <a href="#">
+        <span class="visually-hidden">Scroll down you dafty</span>
+        <svg class="circle" xmlns="http://www.w3.org/2000/svg">
+          <g>
+            <ellipse class="background" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="1"/>
+            <ellipse class="foreground" ry="60" rx="60" cy="62.5" cx="62.5" stroke-width="2"/>
+          </g>
+        </svg>
+      </a>
+       -->
+
+    </div>
+  </div>
+
+  <div class="middle-container">
+
+    <!-- <ng-container *ngIf="showinputs; then guardarfalse; else editartrue"></ng-container> -->
+
+    <form
+      [formGroup]="form_educacion"
+      (ngSubmit)="submit_educacion()"
+      class="form"
+      onsubmit="return false"
+      autocomplete="off"
+      >
+    
+     <div class="titulo-container">
+
+      <div class="title">
+
+        <span>show inputs es: {{showinputs}}</span>
+
+        <h2 *ngIf="!showinputs" data-aos="fade-right" data-aos-duration="2500">
+          educacion & cursos
+        </h2>
+
+        <h1>ES ADMIN? {{ESADMIN}}</h1>
+
+        <div *ngIf="ESADMIN == 'ADMIN'"  class="iconos-wrapper">
+
+          <i
+          (click)="saveTitulo()"
+          (click)="showinputs = !showinputs"
+          *ngIf="showinputs"
+          class="bx bxs-save icon2">
+          </i>
+    
+          <i
+          (click)="cerrartitulo()"
+          (click)="showinputs = !showinputs"
+          *ngIf="showinputs"
+          class='bx bx-arrow-back'>
+          </i>
+    
+       
+          <i
+          *ngIf="!showinputs"
+          class="bx bx-edit-alt icon3 icon-edit1"
+          (click)="showinputs = !showinputs"
+          #editar>
+          </i>
+
+          <input
+          type="text"
+          formControlName="titulo"
+          *ngIf="showinputs" 
+          >
+
+        </div>
+
+         <!-- LOG IN    -->
+       <!-- <i *ngIf="ESADMIN == 'ADMIN' && !showinputs" (click)="showinputs = !showinputs" class='bx bx-edit-alt icon-edit1' (click)="clickcard(i)"></i> -->
+        
+      </div>
+     </div>
+
+    </form>
+
+    <div class="card-container">
+
+      <!--data-aos="fade-left" 
+      data-aos-duration="2700"-->
+      <div class="containericonos">
+
+      </div>
+
+      <div class="nuevocard">
+
+        <form
+        [formGroup]="form_nuevocard"
+        (ngSubmit)="submit_nuevocard()"
+        class="form"
+        onsubmit="return false"
+        autocomplete="off"
+        >
+        
+        <div class="form-group titulocard">
+          <!-- <label for="tiulocard_nuevo">Ingresar Titulo card</label> -->
+          <input type="text" formControlName="titulocard_nuevo" id="titulocard_nuevo" placeholder="Ingresar titulo">
+          <span></span>
+        </div>
+       
+        <div class="form-group subtitulocard">
+           <!--  <label for="subtitulocard_nuevo">Ingresar Subtitulo card</label> -->
+          <input type="text" formControlName="subtitulocard_nuevo" id="subtitulocard_nuevo" placeholder="Ingresar subtitulo">  
+        </div>
+  
+        <div class="form-group thumbnailcard">
+         <!-- <label for="imagencard_nuevo">Ingresar Imagen card</label> -->
+          <input
+          (change)="ThumbnailcardPreview($event)"
+          type="file"
+          accept="image/*"
+          id="imagencard_nuevo"
+          formControlName="imagencard_nuevo"/>  
+        </div>
+       
+       <div class="form-group fechatitulo">
+       <!-- <label for="titulofechacard__nuevo">Ingresar fecha titulo</label> -->
+        <input type="text" formControlName="titulofechacard__nuevo" id="titulofechacard__nuevo" placeholder="Ingresar titulo fecha">
+       </div>
+       
+       <div class="form-group">
+
+        <input
+        type="date"
+        id="dateinicio_nuevo"
+        name="trip-start"
+        value="2018-05-22"
+        min="2018-01-01"
+        max="2024-12-31"
+        formControlName="dateinicio_nuevo"/>
+
+        <input
+        type="date"
+        id="datefinal_nuevo"
+        name="trip-end"
+        value="2020-05-22"
+        min="2018-01-01"
+        max="2024-12-31"
+        formControlName="datefinal_nuevo"/>
+
+       </div>
+     
+
+        <button>Crear Nuevo Card</button>
+      
+       </form>
+
+      </div>
+
+      <div class="separadorcard" *ngFor="let cardlist of cardlistdatabase, let i = index">
+
+        <!-- ESTE ES EL FORMULARIO DEL CARD     (ngSubmit)="crearnuevacardsubmit()" -->
+      <form
+      [formGroup]="form_card"
+      class="form"
+      onsubmit="return false"
+      autocomplete="off"
+      >
+        <div class="card" data-aos="fade-down" data-aos-duration="2300">
+
+          <div class="card-img">
+
+            <div class="inner-image">
+
+              <img [ngClass]="login ? 'opacidadActive' : 'opacidadInactive'" class="edu-img" 
+              src="/assets/educacion/issd.jpg" alt=""
+              [src]="('data:image/jpg;base64,' + cardlist.thumbnailString)"
+              />
+
+              <!-- LOG IN
+              <i (click)="showinputscardimg = !showinputscardimg" *ngIf="ESADMIN == 'ADMIN' && !showinputscardimg" class='bx bx-edit-alt icon-editimg' (click)="clickcard(i)"></i>
+             -->
+
+             <!-- form input image -->  
+              <input
+              (click)="showinputscardimg = !showinputscardimg"
+              *ngIf="ESADMIN == 'ADMIN'"
+              (change)="ActualizarThumbnail(cardlist.id ,$event)"
+              type="file"
+              accept="image/*"
+              formControlName="imagencard"
+              id="imagencard"
+              class="icon-editinput"
+              title=" "
+              />
+
+              <!-- img portada cuando no este la foto -->
+             <!-- <img class="edu-img" src="/assets/educacion/issd.jpg" alt="" /> -->
+
+            </div>
+
+          </div>
+
+          <div class="main">
+            <div class="main-container">
+              <div class="title1">
+                <div class="title1-h2">
+
+                  
+
+                  <h2 *ngIf="!showinputscardtitulo" >{{cardlist.titulocard}}</h2>
+
+
+                 
+
+                  <!-- LOG IN -->
+                  <i 
+                  *ngIf="ESADMIN == 'ADMIN' && !this.toggle_titulo[i]" 
+                  class='bx bx-edit-alt icon-edit2 editar'
+                  (click)="this.toggle_titulo[i] = !this.toggle_titulo[i]"></i>
+                   <!-- (click)="showinputscardtitulo = !showinputscardtitulo" -->
+
+                  <pre>TOGGLE DE EDIT ESTA AQUI:  {{ this.toggle_titulo[i] ? 'Enabled' : 'Disabled'}}</pre>
+
+                  <div class="iconsosteiner">
+                  
+                    <button [disabled]="titulocard.length < 5">
+
+                      <i class="bx bxs-save icon-edit3 guardar"
+                      (click)="ActualizarTituloCard(cardlist.id)" 
+                      *ngIf="this.toggle_titulo[i]" 
+                      (click)="this.toggle_titulo[i] = !this.toggle_titulo[i]">
+                      </i>
+
+                      <!-- (click)="showinputscardtitulo = !showinputscardtitulo" -->
+
+                    </button>
+
+                      <i  
+                      *ngIf="this.toggle_titulo[i]" 
+                      (click)="clickcard(i)" 
+                      class='bx bx-window-close icon-edit3 cerrar'
+                      (click)="this.toggle_titulo[i] = !this.toggle_titulo[i]"> <!-- (click)="showinputscardtitulo = !showinputscardtitulo" --></i>
+                    </div>
+    
+
+                  <input *ngIf="this.toggle_titulo[i]" type="text" formControlName="titulocard" id="titulocard">
+                  <span></span>
+
+
+
+
+      
+
+                </div>
+
+                <div class="subtitle-container">
+
+                  <h1>{{showinputscardsubtitulo}}</h1>
+
+                  <div class="subtitle-p">
+
+                    <p *ngIf="!toggle_subtitulo[i]">{{cardlist.subtitulocard}}</p>
+
+                    <!-- LOG IN -->                    <!-- LOG IN -->
+
+                    <div class="iconsosteiner">
+                     <i class='bx bx-edit-alt icon-edit3' 
+                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
+                     *ngIf="ESADMIN == 'ADMIN' && !toggle_subtitulo[i]"></i>
+
+                     <br>
+                     <button 
+                     [disabled]="subtitulocard.length < 5">
+                     <i class="bx bxs-save icon-edit3 guardar" 
+                     (click)="ActualizarSubtituloCard(cardlist.id)" 
+                     *ngIf="toggle_subtitulo[i]" 
+                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]"></i>
+
+                     </button>
+                     <br>
+                     <i class='bx bx-window-close icon-edit3 cerrar' 
+                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
+                     *ngIf="toggle_subtitulo[i]"></i>
+
+                    </div> 
+
+                    <!-- FORM PARA SUBTITULO card -->
+                    <input *ngIf="toggle_subtitulo[i]" type="text" formControlName="subtitulocard" id="subtitulocard" placeholder="subtitulo card">
+                    <div *ngIf="toggle_subtitulo[i] && subtitulocard.length < 5">
+                      Name must be at least 5 characters long.
+                    </div> 
+
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="title2">
+
+                <label for="start" *ngIf="!toggle_fechatitulo[i]">{{cardlist.titulodate}}</label>
+
+                <!-- LOG IN
+                <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit4' (click)="clickcard(i)"></i>
+                 -->
+
+                <i class='bx bx-edit-alt icon-edit4' 
+                (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]" 
+                *ngIf="ESADMIN == 'ADMIN' && !toggle_fechatitulo[i]"></i>
+                
+                 <div class="iconsosteiner">
+                  
+                  <button (click)="ActualizarTitulofechacard(cardlist.id)" [disabled]="titulofechacard.length < 5">
+                    <i class="bx bxs-save icon-edit3 guardar"
+                    *ngIf="toggle_fechatitulo[i]" 
+                    (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]">
+                    </i>
+                   </button>
+    
+                    <i class='bx bx-window-close icon-edit3 cerrar'
+                    (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]" 
+                    *ngIf="toggle_fechatitulo[i]">
+                    </i>
+
+                 </div>
+
+                 <!-- FORM FECHA TITULO card -->
+                 <input *ngIf="toggle_fechatitulo[i]" type="text" formControlName="titulofechacard" id="titulofechacard">
+
+                <div class="inputs-container">
+                  <!--
+                  <div class="input-text-container">
+                    <p>-</p>
+                    
+                  </div>
+                  -->
+
+                  <div class="inputs-inner">
+                    <div class="input-inicio">
+                      <div class="p-inicio">
+                        <h3>inicio</h3>
+
+                      </div>
+
+                      <div class="input-input">
+
+                        <h3 *ngIf="!toggle_fecha[i]">{{cardlist.start}}</h3>
+
+                        <input
+                          *ngIf="toggle_fecha[i]"
+                          type="date"
+                          id="start"
+                          name="trip-start"
+                          value="2018-05-22"
+                          min="2018-01-01"
+                          max="2024-12-31"
+                          formControlName="dateinicio"
+                        
+                        />
+                      </div>
+                    </div>
+
+                    <div class="input-fin">
+                      <div class="p-fin">
+                        <!-- <input type="text" class="text"> -->
+                        <h3>finalizacion</h3>
+                      </div>
+
+                      <div class="input-input">
+
+                        <h3 *ngIf="!toggle_fecha[i]">{{cardlist.end}}</h3>
+
+                        <input
+                        *ngIf="toggle_fecha[i]"
+                          type="date"
+                          id="start"
+                          name="trip-end"
+                          value="2020-05-22"
+                          min="2018-01-01"
+                          max="2024-12-31"
+                          formControlName="datefinal"
+                        
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="container-icon-editfecha">
+                    
+                    <i (click)="toggle_fecha[i] = !toggle_fecha[i]" 
+                    *ngIf="ESADMIN == 'ADMIN' && !toggle_fecha[i]"
+                    class='bx bx-calendar-edit icon-editfecha'></i>
+
+                    <p *ngIf="ESADMIN == 'ADMIN' && !toggle_fecha[i]">Editar Fechas</p>
+
+                    <i (click)="toggle_fecha[i] = !toggle_fecha[i]" 
+                    *ngIf="toggle_fecha[i]" 
+                    class='bx bx-window-close icon-edit3 cerrar'></i>
+
+                    <i class="bx bxs-save icon-editfecha guardar"
+                    (click)="ActualizarFechascard(cardlist.id)"
+                    *ngIf="ESADMIN == 'ADMIN' && toggle_fecha[i]"></i>
+
+                    <p *ngIf="ESADMIN == 'ADMIN' && toggle_fecha[i]">Guardar Fecha</p>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>  
+      </div>
+
+      <!-- CARD NUMERO 2 -->
+
+      <!-- card numero 3 -->
+    </div>
+
+    <!-- section of middle-footer -->
+    <div class="footer-container">
+      <div class="footer-container--inner">
+        <!-- data-aos="fade-up" data-aos-duration="2900" reponerrr -->
+
+        <div class="circles">
+
+          <div
+           data-aos="fade-right"
+           data-aos-anchor="#texto-medio"
+           data-aos-anchor-placement="top-top"
+           data-aos-duration="2000"
+           class="texto-medio"
+          >
+            <p>INSTITUTO SUPERIOR SANTO DOMINGO</p>
+
+            <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-editfooter' (click)="clickcard(i)"></i>            
+
+          </div>
+
+          <!--
+
+           <div class="circle circle-a">
+            <div class="circle-inner">
+
+            </div>
+          </div>
+
+          <div class="circle circle-b">
+            <div class="circle-inner">
+
+            </div>
+          </div>
+
+          <div class="circle circle-c">
+            <div class="circle-inner">
+
+            </div>
+          </div>
+
+          <div class="circle circle-d">
+            <div class="circle-inner">
+
+            </div>
+          </div>
+         
+
+          <div class="circle circle-e">
+            <div class="circle-inner">
+              
+            </div>
+          </div>
+           -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

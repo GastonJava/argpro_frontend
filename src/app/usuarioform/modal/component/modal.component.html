@@ -1,0 +1,59 @@
+<div id="modal-content-wrapper">
+
+ 
+
+<!--
+  <header id="modal-header">
+      <h1 id="modal-title">Formulario de Login</h1>
+  </header>
+-->
+  <section id="modal-body">
+ 
+    <!--<app-login></app-login> -->
+    <router-outlet></router-outlet> <!-- name="modal" --> 
+    <!--<app-crear></app-crear> --> 
+    
+  </section>
+  <footer id="modal-footer">
+
+   
+    <!--
+       <span>Current Value: {{toggle}}</span>
+    <div *ngIf="toggle">Grid</div>
+    <div *ngIf="!toggle">List</div>
+    -->
+    
+    <mat-button-toggle-group [value]="toggle" (change)="toggleView($event)">
+
+      <mat-button-toggle [routerLink]="['/crear']" *ngIf="!toggle" [value]="true" mat-flat-button id="modal-action-button" >
+        ya tienes cuenta?
+      </mat-button-toggle>
+
+      <mat-button-toggle [routerLink]="['/login']" *ngIf="toggle" [value]="false" mat-flat-button id="modal-action-button" > 
+        Eres Usuario Nuevo?
+     </mat-button-toggle>
+
+    </mat-button-toggle-group>
+
+    <button mat-raised-button id="modal-cancel-button" (click)="closeModal()">
+        Go back
+    </button>
+
+    
+
+       <!--(click)="actionFunction()" *ngIf="currentRoute" *ngIf="currentRoute; else elseblock"
+       <button mat-flat-button id="modal-action-button" [routerLink]="['/crear']" *ngIf="!toggle"> 
+        Eres Usuario Nuevo?
+       </button>
+         -->
+
+     <!--(click)="actionFunction()" *ngIf="!currentRoute" <ng-template #elseblock>
+      </ng-template> 
+     <button mat-flat-button id="modal-action-button" [routerLink]="['/login']" *ngIf="toggle"> 
+     
+      ya tienes cuenta?
+     </button>
+     -->
+
+  </footer>
+</div>

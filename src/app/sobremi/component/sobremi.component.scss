@@ -1,0 +1,209 @@
+@import '../../../assets/utilities/SCSS/main.scss'; 
+
+@mixin shadow_text() {
+    text-shadow: 3px 4px 2px rgb(0 0 0 / 11%);
+}
+
+@mixin shadow_img () {
+    box-shadow: 1px -4px 14px 0px rgb(0 0 0 / 20%);
+}
+
+form {
+    height: 100%;
+}
+
+section {
+    background: red;
+    height: calc(100vh - 80px);
+    width: 100wh;
+    margin-top: 80px;
+
+     //WAVES..............
+    .custom-shape-divider-bottom-1647393674 {
+        position: absolute;
+        bottom: -100px;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+
+        @include rwd (600){
+            bottom: 0;
+            z-index: 1;
+        }
+    }
+
+    .custom-shape-divider-bottom-1647393674 svg {
+        width: calc(166% + 1.3px);
+        height: 154px;
+    }
+    
+    /*
+    .custom-shape-divider-bottom-1647393674 svg {
+        position: relative;
+        display: block;
+        width: calc(224% + 1.3px);
+        height: 132px;
+    }
+    */
+    
+    .custom-shape-divider-bottom-1647393674 .shape-fill {
+        fill: #A1DDDA;
+        filter: drop-shadow(-4px -10px 17px #000);
+    }
+
+    @include sm() {
+        //Properties for large screens
+        width: 100%;
+        background: blue;
+    }
+}
+
+.bannerback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #92A9BD;
+    height: 100%;
+    padding: 5px;
+
+    .imgcontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 40%;
+        width: 90%;
+
+        //medida customizada
+        @include rwd(600){
+            width: 60%;
+          
+        }
+
+        //medida tablet
+        @include md(){
+            background-color: #000;
+        }
+
+        //medida notebook
+        @include lg(){
+            background-color: aqua;
+        }
+
+        //medida monitor
+        @include xl(){
+            background-color: blue;
+        }
+
+        @include shadow_img();
+
+        // LOG IN
+        .icon1 {
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            position: absolute;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .descripcion {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 35%;
+        width: 90%;
+
+        .innerdescripcion {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            padding: 5px;
+            width: 100%;
+            height: 100%;
+
+           //medida customizada
+           @include rwd(600){
+             width: 80%; 
+            }
+        }
+
+        .titulo_contenedor {
+            width: 100%;
+            height: 20%;
+            border-bottom: 0.01rem solid #103a3a38;
+            position: relative;
+
+            // LOG IN
+            .icon2 {
+                font-size: 25px;
+                top: 5px;
+                right: 15px;
+                position: absolute;
+            }
+
+            h2 {
+                color: blanchedalmond;
+                font-size: 1.5rem;
+                @include shadow_text();
+    
+                span {
+                    
+                    color: #2b7d9d;
+                }
+            }
+        }
+
+        .subtitulo_contenedor {
+
+            position: relative;
+
+            p {
+                font-size: 1em; //font-size: 0.90em;
+                line-height: 20px;
+                color: #103a3a;
+
+                @include shadow_text();
+            }
+
+            .icon3 {
+                font-size: 25px;
+                bottom: 5px;
+                right: 15px;
+                position: absolute;
+
+            }
+        }
+       
+    }
+    
+}
+
+
+//---------------------------------------------------------- // 
+i {
+    width: 2px;
+    position: relative;
+    right: 30px;
+    font-size: 20px;
+    line-height: 40px;
+    cursor: pointer;
+    z-index: 1;
+    color: #03045fc7;
+  }
+  
+  input {
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    height: 25px;
+    padding: 5px;
+    width: 420px;
+  }
+  

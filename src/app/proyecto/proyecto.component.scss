@@ -1,0 +1,424 @@
+// IMPORTS
+@import "../../assets/utilities/SCSS/main.scss";
+
+//clase para la flecha cambiar UP y DOWN
+.flechaup {
+  transition: 2s all;
+  transform: rotateX(180deg);
+}
+
+.flechadown {
+  transition: 2s all;
+  transform: rotateX(0deg);
+}
+
+// OPACIDAD DE IMAGEN CARD
+.opacidad-imgcard-login {
+  opacity: 0.5;
+}
+
+.opacidad-imgcard-logout {
+  opacity: 1;
+}
+
+p {
+  user-select: none;
+}
+
+.container {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.container-header {
+  @include flex-center();
+  height: 10%;
+  background-color: #62a7a7;
+
+  .proy-container {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    background-color: #74a5a5;
+
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 40px;
+      color: floralwhite;
+    }
+
+    .icon-edit1 {
+      cursor: pointer;
+      position: absolute;
+      font-size: 22px;
+      left: calc(100% / 2);
+      bottom: 0;
+      color: ghostwhite;
+    }
+
+
+  }
+}
+
+.container-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  background-color: aqua;
+
+  // CARD CONTAINERS
+  .cards {
+    //display: flex;
+    @include flex-center();
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #74a5a5;
+
+    .wrapper {
+      @include flex-center();
+      height: 70%;
+      width: 70%;
+      /*border-radius: 30px; */
+      //background: gainsboro;
+    }
+
+    .card {
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+      border-radius: 1em;
+      overflow: hidden;
+      height: 90%;
+      width: 90%;
+    }
+
+    /*container-img*/
+    .container-img {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    //img
+    .card-image {
+      position: absolute;
+      height: 55%;
+      width: 100%;
+      top: 0;
+      transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+      object-fit: fill;
+      border-radius: 1em 1em 0em 0em;
+      //opacity: 0.5;
+    }
+
+    /* ICONO DE LOGIN */
+    .icon-edit2 {
+      position: absolute;
+      color: darkblue;
+      cursor: pointer;
+      font-size: 90px;
+    }
+
+    /*Description */
+    .card-description {
+      display: flex;
+      gap: 0.01rem;
+      flex-direction: column;
+      justify-content: space-between; /* config original NADA*/
+      background-color: #f5f5f5;
+      height: 70%;
+      width: 100%;
+      position: absolute;
+      bottom: 20%; /* 0 */
+      border-radius: 1em 1em 0 0;
+      transition: all 1s cubic-bezier(0.645, 0.045, 0.355, 1);
+      padding: 0.5rem;
+
+      .logout {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* EDITAR CUANDO EL USUARIO ESTA LOGIN*/
+        .drag-container {
+
+          .section-heading {
+            position: relative;
+          }
+
+          .icon-flechaBajar {
+  
+            cursor: pointer;
+            position: absolute;
+            color: #74a5a5;
+            top: 10px;
+            right: 10px;
+            font-size: 28px;
+          }
+        }
+
+      
+    }
+
+    .title-container {
+      height: 25%;
+      width: 100%;
+      padding-left: 15px;
+
+      position: relative;
+      //background: red;
+
+      .text-title {
+        font-size: 1.4em;
+        font-weight: 700;
+        //user-select: none;
+      }
+
+      .icon-edittitle {
+        cursor: pointer;
+        position: absolute;
+        color: darkkhaki;
+        font-size: 24px;
+        top: 0;
+        left: calc(100% / 1.3);
+      }
+
+     
+    }
+
+    .descripcion-container {
+      overflow-y: scroll;
+      height: 60%;
+      width: 100%;
+      padding: 10px;
+      background: #2b97973d;
+      //background:  blueviolet;
+
+      .descripcion-container-p {
+        height: 250px;
+        width: 100%;
+        background: grey;
+      }
+
+      .text-body {
+        font-size: 1em;
+        line-height: 150%;
+      }
+    }
+
+    .bottom-container {
+      height: auto; //25%
+      min-height: 25%;
+      width: 100%;
+      background: #9aabab;
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 4px;
+        margin-bottom: 2px;
+        height: 100%;
+
+        .tag {
+          border-width: 1px;
+          margin-right: 0.5rem;
+          margin-bottom: 0.5rem;
+          padding: 0.25rem 0.5rem;
+          background-color: rgba(64, 64, 64, 1);
+        }
+
+        .tag:hover {
+          background: opacity(1);
+          color: rgba(255, 255, 255, 1);
+          border-color: rgba(155, 155, 155, 1);
+        }
+
+        .tag-rounded {
+          border-radius: 0.5rem;
+        }
+
+        .text-sm {
+          font-size: 0.87rem;
+          line-height: 1.25rem;
+          margin-right: 5px;
+          background-color: #525252;
+          padding: 2px;
+        }
+      }
+    }
+
+    /* Hover states */
+    .cardtouched .card-description {
+      transform: translateY(100%);
+    }
+
+    .cardtouched .card-image {
+      height: 90%;
+      width: 100%;
+      object-fit: fill;
+      transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1);
+      border-radius: 1em;
+      //opacity: 1;
+    }
+
+    .cardno_touch .card-description {
+      transform: translateY(0%);
+    }
+
+    /*
+    .cardno_touch .card-image {
+      height: 0%;
+    }
+    */
+
+    /*
+    .card:hover .card-description {
+      transform: translateY(100%);
+    }
+    
+    .card:hover .card-image {
+      height: 100%;
+    }
+    */
+
+    //scroll customizador
+    scroll-behavior: smooth;
+    //scrollbar-width: thin;
+    //scrollbar-color: #90A4AE, #CFD8DC;
+  }
+  .cards::-webkit-scrollbar {
+    //width: 14px;
+  }
+  .cards::-webkit-scrollbar-track {
+    background: #cfd8dc;
+  }
+  .cards::-webkit-scrollbar-thumb {
+    //background-color: #90a4ae;
+    //border-radius: 8px;
+    //border: 2px solid #cfd8dc;
+  }
+}
+
+.container-bottom {
+  height: 20%;
+  background-color: #62a7a7;
+  
+  h1 {
+    text-align: center;
+    color: #62a7a7;
+  }
+
+}
+
+:host::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: cornflowerblue;
+}
+
+:host::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #74a5a56b;
+}
+
+//testeamoss
+//color fondo del slide
+/*
+:host::ng-deep .mat-slide-toggle-bar {
+  background-color: #74a5a56b;
+}
+
+:host::ng-deep .mat-slide-toggle-thumb {
+  background-color: #76e3e3;
+}
+
+:host::ng-deep .mat-slide-toggle.mat-checked {
+  background-color: #29e8e8;
+}
+*/
+
+.drag-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #9aabab85;
+  width: 100%;
+  height: 70%;
+
+  .section-heading {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 5px 5px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  //titulo y descripcion tittle-desc container
+  .title-descr {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 90%;
+    max-height: 60%;
+  }
+}
+
+.item-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  min-height: 45px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 5px;
+  //background: brown;
+}
+
+.item-box {
+  padding: 5px 8px;
+  border: solid 1px #ccc;
+  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 11px;
+  border-radius: 20px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+

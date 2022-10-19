@@ -1,0 +1,311 @@
+<!--
+<section class="container">
+  <section class="container-title">
+    <h1>Hard and soft skill</h1>
+  </section>
+
+  <section class="container-skills1">
+    <mat-card>
+      <mat-card-content>
+
+        <div class="progress1">
+
+          <h2 class="example-h2">Result</h2>
+
+          <mat-progress-spinner 
+            class="example-margin" 
+            [value]="80">
+          </mat-progress-spinner>
+
+        </div>
+
+        <div class="progress2">
+
+          <h2>Ejemplo 2</h2>
+
+          <mat-progress-spinner
+            class="example-margin"
+            color="primary"
+            [value]="50"
+          >
+          </mat-progress-spinner>
+
+        </div>
+
+       
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="container-skills2">
+
+    <mat-card>
+      <mat-card-content>
+
+        <div class="progress1">
+
+          <h2 class="example-h2">C#</h2>
+
+          <mat-progress-spinner 
+            class="example-margin" 
+            [value]="55">
+          </mat-progress-spinner>
+
+        </div>
+
+        <div class="progress2">
+
+          <h2>JAVA</h2>
+
+          <mat-progress-spinner
+            class="example-margin"
+            color="primary"
+            [value]="55"
+          >
+          </mat-progress-spinner>
+
+        </div>
+
+      
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  
+</section>
+ -->
+
+
+<!--
+
+  TESTING 1 START
+
+-->
+
+
+<div class="skill">
+
+    <div class="skill_title">
+  
+      <h2>HARD AND SKILL</h2>
+  
+      <i *ngIf="login" class='edit-icon1 bx bxs-message-rounded-edit'></i>
+  
+    </div>
+    
+  
+    <div class="skill-container-height" *ngFor="let card of cards, let i = index">
+  
+      <div class="skill-container">
+  
+        <div class="title_container">
+  
+          <h2>{{card.titulo}}</h2>
+          
+        </div>
+    
+        <div class="outer_container">
+  
+          <div class="outer">
+  
+            <div class="inner">
+  
+              <div id="number">
+  
+                {{card.porcentaje}}<p>%</p>
+                
+              </div>
+            </div>
+          </div>
+  
+        </div>
+        
+    
+      </div>
+    
+      <i *ngIf="login" class='bx bx-edit-alt icon_edit' ></i>
+  
+    </div>
+  
+  
+  
+  
+  
+  
+    <!-- texteando el nuevo -->
+    <div class="container bg-primary" ><br>
+      <div id="progress" class="progress bg-danger" style="width:50%;">
+        <div id="progress-bar" class="progress-bar bg-secondary" role="progressbar" style="width:0%;">
+          <span class="bg-text" id="texto"></span>
+        </div>
+      </div>
+      </div> 
+  </div>
+  <!--
+      TESTING 2 END
+  -->
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+  <!-- COPIAMOS LA EDICION DESDE CUANDO SE CAMBIA EL SKILL CON BARRA DE PROGRESO XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+
+
+<!--
+<section class="container">
+  <section class="container-title">
+    <h1>Hard and soft skill</h1>
+  </section>
+
+  <section class="container-skills1">
+    <mat-card>
+      <mat-card-content>
+
+        <div class="progress1">
+
+          <h2 class="example-h2">Result</h2>
+
+          <mat-progress-spinner 
+            class="example-margin" 
+            [value]="80">
+          </mat-progress-spinner>
+
+        </div>
+
+        <div class="progress2">
+
+          <h2>Ejemplo 2</h2>
+
+          <mat-progress-spinner
+            class="example-margin"
+            color="primary"
+            [value]="50"
+          >
+          </mat-progress-spinner>
+
+        </div>
+
+       
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="container-skills2">
+
+    <mat-card>
+      <mat-card-content>
+
+        <div class="progress1">
+
+          <h2 class="example-h2">C#</h2>
+
+          <mat-progress-spinner 
+            class="example-margin" 
+            [value]="55">
+          </mat-progress-spinner>
+
+        </div>
+
+        <div class="progress2">
+
+          <h2>JAVA</h2>
+
+          <mat-progress-spinner
+            class="example-margin"
+            color="primary"
+            [value]="55"
+          >
+          </mat-progress-spinner>
+
+        </div>
+
+      
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  
+</section>
+ -->
+
+
+<!--
+
+  TESTING 1 START
+
+-->
+
+
+<div class="skill">
+
+  <div class="skill_title">
+
+    <h2>HARD AND SKILL</h2>
+
+    <i *ngIf="login" class='edit-icon1 bx bxs-message-rounded-edit'></i>
+
+  </div>
+  
+
+  <div class="skill-container-height" *ngFor="let card of cards, let i = index">
+
+    <!-- 
+    <p>ancho en jason: </p>
+    <pre>{{card[i].ancho | json}}</pre>
+    -->
+
+    <div class="skill-container">
+
+      <div class="container progress_container">
+
+        <div class="title_container">
+
+          <div class="probamos">
+
+            <mat-progress-bar #porcentaje mode="determinate" value="{{card.ancho}}"></mat-progress-bar> <!-- subirporcentaje$ | async --> 
+
+            <!-- <ng-progress #progressBar (started)="onStarted()" (completed)="onCompleted()"></ng-progress> --> 
+
+         
+
+            <!--<span class="bg-text" id="texto" (click)="animacionbar(card.ancho)"></span>-->
+
+            <!--
+            <div class="progress" id="progress" [style.width.%]="card.ancho" #width>
+
+              card ancho: {{card.ancho}}
+
+              <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+
+            </div>
+            -->
+
+            
+
+          </div> 
+         
+          <h2>{{card.titulo}}</h2>
+          
+        </div>
+
+      </div>
+      
+    </div>
+  
+    <i *ngIf="login" class='bx bx-edit-alt icon_edit' ></i>
+
+  </div>
+
+
+  <!-- texteando el nuevo -->
+
+<!--
+    TESTING 2 END
+-->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+

@@ -1,0 +1,32 @@
+.file-input {
+    position: relative;
+    height: 30px;
+    width: 100px;
+  }
+  
+  .file-input > input[type="file"] {
+    position: absoulte;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .file-input > label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #666;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer
+  }
+  
+
+  

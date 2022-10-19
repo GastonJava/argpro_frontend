@@ -1,0 +1,6 @@
+<div>
+  <span>Choose file</span>
+  <input multiple="multiple" accept="image/*" type="file" (change)="onChange($event)"> <!-- (change)="selectFile($event)"-->
+</div>
+
+<img [src]="imagen$ | async" width="300px" height="300px" alt="">
