@@ -186,42 +186,6 @@ export class ExperienciaComponent implements OnInit {
     return this.expservices.getcardlist().pipe(map(cards => {
       this.cardlistdatabase = cards;
 
-      console.log(this.cardlistdatabase.length);
-
-      //console.log(cards.length); 
-      //console.log(cards[0].titulocard); 
-
-      
-
-      //console.log(this.cardgetlist2);
-
-      //console.log(atob((<any>cards).imagencard));
-
-      //console.log("base_64_encode: "+new TextDecoder.decode(this.cardlistdatabase.imagencard));
-      //var lerr = new TextDecoder.decode(this.cardlistdatabase.imagencard);
-      //byte array
-      //const uint8array = new TextEncoder().encode(this.imagencard_SOLO_BYTEARRAY_SIN_TEXT);
-
-      //text array
-      //const decodeimgstring = new TextDecoder().decode(this.cardlistdatabase.imagencard);
-
-      //console.log("decode img string..._"+decodeimgstring);
-
-      //let result = this.fromBinary(uint8array);
-
-      //console.log("probando... "+result);
-
-      //var uint8array = TextEncoder(encoding).encode(string);
-      //var string = TextDecoder(encoding).decode(this.cardlistdatabase.imagencard);
-      //console.log("byte de texto... "+atob(this.imagencard_SOLO_BYTEARRAY_SIN_TEXT)); //new TextDecoder("utf8").decode(uint8array))
-
-      //console.log(Buffer.from(this.imagencard_SOLO_BYTEARRAY_SIN_TEXT).toString());
-
-      //console.log(decodeimgstring);
-
-      
-
-      debugger
     })).subscribe();
   }
 
@@ -269,18 +233,12 @@ export class ExperienciaComponent implements OnInit {
         this.imagencard_SOLO_SIN_data_imagejpg_base64 =  imagencardpreview.imagecardPreviewts;
         //this. imagencard_SOLO_BYTEARRAY_SIN_TEXT = imagencardpreview.imagecardPreviewts;
         this.imagecardPreviewts = 'data:image/jpg;base64,' + imagencardpreview.imagecardPreviewts,
-        //this.imagecardPreviewts = imagencardpreview.imagecardPreviewts,
-        //this.imagecardPreviewts = 'data:image/jpg;base64,' + imagencardpreview.imagecardPreviewts,
 
         this.imagecardPreviewdb = imagencardpreview.imagencardPreviewdb;
 
-        console.log("supuestaimagenDTABASE: "+imagencardpreview.imagencardPreviewdb);
+   
 
-        debugger
 
-        //let objectURL = URL.createObjectURL(this.imagecardPreviewdb);       
-        //this.imagetest = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        //debugger
       }
       
     )).subscribe(); 
@@ -323,14 +281,10 @@ export class ExperienciaComponent implements OnInit {
       nuevacard.append("imagecardPreviewts", this.imagencard_SOLO_SIN_data_imagejpg_base64);
       
 
-      console.log( nuevacard.get("subtitulocard"));
-
-      debugger
       this.expservices.crearcardnueva(nuevacard).pipe(map(result =>
         {
           if(result){
             this.Cardlist();
-            debugger
           }
       
       })).subscribe();
@@ -360,7 +314,6 @@ export class ExperienciaComponent implements OnInit {
     nuevacard.append("titulocardedit", titulocardedit);
     nuevacard.append("subtitulocardedit", subtitulocardedit);
 
-    debugger
 
   }
 
@@ -395,25 +348,19 @@ export class ExperienciaComponent implements OnInit {
       
     )).subscribe();
     
-    console.log("presionamos el savetitulo");
-    //debugger
+
   }
 
    //EDITAR TITULO DENTRO DE CARD actualizar
   //TODO: guardar titulo
   ActualizarSubtitulo(id){
-    console.log("save tituloooooo id: "+id);
+
     let subtitulodata = new FormData();
     const subtitulo = this.subtitulocardedit;
-    //this.subtitulomessage = this.form.get('subtitulo').value;
     if(subtitulo.length <= 0){
-      console.log("que significa it: "+subtitulo);
       return;
     }
-    
-    console.log("que significa it: "+subtitulo);
 
-    console.log("que significa it despues de return");
     subtitulodata.append("id" ,id);
     subtitulodata.append('subtituloeditcard', subtitulo);
 
@@ -428,13 +375,9 @@ export class ExperienciaComponent implements OnInit {
       }
 
     }
-  
-
       
     )).subscribe();
-    
-    console.log("presionamos el savetitulo");
-    //debugger
+
   }
 
   ActualizarImg(id, imagencard){
@@ -459,7 +402,6 @@ export class ExperienciaComponent implements OnInit {
         next: data => {
 
           console.log(data);
-          debugger
 
           this.Cardlist();
           

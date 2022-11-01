@@ -162,8 +162,7 @@ export class SobremiComponent implements OnInit {
               const previewBase64 = (<any>data).portada;
               this.portadaimage = 'data:image/jpg;base64,' + previewBase64;
 
-              // --------------------------------------------------------------------------- AREA DE TESTEOSSSSSS LUEGO BORRARRRRRRRR
-              console.log();
+
               //necesitamos enviar el id al loal storage y cambiar observable
               this.sobremichanges.changeSobremiIdValue(this.sobremiid);
               this.sobremiLocalStorage.setStorageSobremiId("sobremiid", this.sobremiid);
@@ -172,8 +171,7 @@ export class SobremiComponent implements OnInit {
               this.sobremichanges.changeSobremiImageValue(this.portadaimage);
               this.sobremiLocalStorage.setStorageSobremiImage("storageSobremiImage", this.portadaimage);
               
-              debugger
-              // --------------------------------------------------------------------------- AREA DE TESTEOSSSSSS LUEGO BORRARRRRRRRR
+
 
             },
             (error: any) => {
@@ -299,8 +297,7 @@ export class SobremiComponent implements OnInit {
 
       //this.subtitulomessage = texto.subtitulo;
     )).subscribe();
-    console.log("presionamos el savetitulo");
-    //debugger
+
   }
 
   cerrartitulo(){
