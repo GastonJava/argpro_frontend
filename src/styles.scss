@@ -3,6 +3,24 @@
 // importamos main donde tenemos mixins
 //@import "/assets/utilities/SCSS/main.scss";
 
+//configuracion estilo para tooltip
+.tooltip-text {
+	position: absolute;
+	background: black;
+	color: white;
+	padding: 5px;
+	border-radius: 10px;
+	top: -30px;
+	//left: calc(50% - 50px);
+	width: 500px;
+  }
+  
+  .tooltip {
+	position: relative
+  }
+
+
+
 * {
     margin: 0;
     padding: 0;

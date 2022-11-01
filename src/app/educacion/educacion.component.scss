@@ -26,17 +26,6 @@ section {
   height: 25%;
   //background-color: #74A5A5;
 
-  /*
-  h2 {
-    display: block;
-    position: relative;
-    text-align: center;
-    bottom: -75%;
-    color: white;
-    z-index: 1000;
-  }
-  */
-
   .imgedu {
     position: relative;
     text-align: center;
@@ -83,11 +72,7 @@ section {
           height: 60px;
           width: 80px;
         }
-
       }
-
-      
-
     }
   }
 
@@ -293,6 +278,32 @@ section {
     flex-wrap: wrap;
     overflow-x: scroll;
 
+    //contenedor
+    .containericonos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: #559ea0;
+      height: 80%;
+      width: 30%;
+
+
+      .eliminarcards {
+        font-size: 40px;
+      }
+
+      .agregarcards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40%;
+        width: 60%;
+        font-size: 80px;
+        cursor: pointer;
+      }
+    }
+
     //after before
 
     .card::before {
@@ -328,8 +339,25 @@ section {
     }
 
     .nuevocard {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+
+      .iconm {
+        font-size: 40px;
+        color: azure;
+      }
 
       form {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        width: 80%;
+        height: 80%;
+        background-color: #159eac;
 
         .form-group {
           /*
@@ -343,8 +371,14 @@ section {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: red;
+          //background: red;
           height: 30px;
+          width: 80%;
+
+          #imagencard_nuevo {
+            color: transparent;
+            width: 75%;
+          }
         }
 
       }
@@ -463,6 +497,10 @@ section {
         height: 100%;
         width: 100%;
         //background-color: cyan;
+
+        .bxs-trash {
+          font-size: 40px;
+        }
       }
 
       //...title1
@@ -478,13 +516,17 @@ section {
           width: 70%;
           height: 50%;
 
+          h2 {
+            font: 18px "Fira Sans", sans-serif;
+          }
+
           .iconsosteiner {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            background: blueviolet;
-            width: 20%;
-            height: 80%;
+            //display: flex;
+            //justify-content: space-evenly;
+            //align-items: center;
+            //background: blueviolet;
+            //width: 20%;
+            //height: 80%;
 
             i {
               font-size: 23px;
@@ -493,9 +535,7 @@ section {
           
           //background-color: aqua;
 
-          h2 {
-            font: 13px "Fira Sans", sans-serif;
-          }
+          
 
           .icon-edit2 {
             cursor: pointer;
@@ -798,12 +838,17 @@ input[type='file'] {  color: transparent;}
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #085c08;
+  background-color: #3f7a8c;
   height: 80%;
   width: 80%;
+  border-radius: 20%;
   
   .icon-editfecha {
     font-size: 40px;
+  }
+
+  .icon-edit3f {
+    font-size: 30px;
   }
 
 }

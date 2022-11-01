@@ -6,6 +6,7 @@ import { environment } from 'src/app/enviroments/enviroment';
 import { EsadminService } from 'src/app/share/services/esadmin.service';
 import { LocalstorageService } from 'src/app/share/services/localstorage.service';
 import { ImagenService } from 'src/app/_services/imagen.service';
+import { SweetAlertOptions } from 'sweetalert2';
 import { SobremiService } from '../SobremiServices/sobremi.service';
 import { SobremichangestateService } from '../SobremiServices/sobremichangestate.service';
 import { SobremilocalstorageService } from '../SobremiServices/sobremilocalstorage.service';
@@ -19,8 +20,12 @@ import { SobremilocalstorageService } from '../SobremiServices/sobremilocalstora
 })
 export class SobremiComponent implements OnInit {
 
+
   //enviare datos para titulo o subtitulo
   sobremiTextoData = new FormData();
+
+  //mostrar boton de ediciones
+  editaricon_isshow: boolean = false;
 
   sobremiid: any;
   simplefile: File;
@@ -60,7 +65,6 @@ export class SobremiComponent implements OnInit {
 
 
   ngOnInit() {
-
 
     this.sobremiservice.getimage().pipe(map(
       (data) => {
@@ -231,17 +235,35 @@ export class SobremiComponent implements OnInit {
           console.log(data);
           if (data) {
             //this.localStorageImage.setStorageImagesId("imageid", 0);
+
+
+
+
+
+
             this.sobremichanges.changeSobremiIdValue(0);
             this.sobremichanges.changeSobremiImageValue('');
+            this.sobremiLocalStorage.eliminarSobremiStorage("sobremiid");
+            this.sobremiLocalStorage.eliminarSobremiStorage('storageSobremiImage');
+
+
+
+
+
+
+
 
             // al eliminar deberia borrarse el storage id
             //this.sobremiLocalStorage.setStorageSobremiId("sobremiid", this.sobremiid);
-            this.sobremiLocalStorage.eliminarSobremiStorage("sobremiid");
+
+
+
+
 
             //eliminamos imagen del storage
             //this.portadaimage = '';
            
-            this.sobremiLocalStorage.eliminarSobremiStorage('storageSobremiImage');
+            
           }
         },
         (error: any) => {

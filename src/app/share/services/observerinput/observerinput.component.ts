@@ -14,6 +14,7 @@ export class ObserverinputComponent implements OnInit {
 
   imagen;
 
+  //async: any;
   ngOnInit() {
   }
 

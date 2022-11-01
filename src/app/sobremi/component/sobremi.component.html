@@ -1,4 +1,5 @@
 <section class="container">
+  <!--
   <h2 class="colorrojo">
     VER EL ROLE DEL USUARIO:
     <pre>{{ ESADMIN }}</pre>
@@ -8,6 +9,7 @@
     VER SI EL USUARIO ESTA LOGUEADO:
     <pre>{{ estalogueado }}</pre>
   </h2>
+  -->
 
   <form
     [formGroup]="form"
@@ -16,38 +18,67 @@
     onsubmit="return false"
     autocomplete="off"
   >
+
     <div class="bannerback" id="trigger-sobremi-h2">
-      <div class="imgcontainer">
+      <div
+        class="imgcontainer"
+        [ngClass]="editaricon_isshow ? 'class-editarfalse' : 'class-editartrue'"
+      >
+        <div class="icono-editarcontainer">
+          <div class="inner-container" *ngIf="ESADMIN == 'ADMIN'">
+            <i
+              *ngIf="editaricon_isshow"
+              (click)="editaricon_isshow = !editaricon_isshow"
+              class="bx bx-paint-roll"
+            ></i>
+
+            <i
+              *ngIf="!editaricon_isshow"
+              (click)="editaricon_isshow = !editaricon_isshow"
+              class="bx bx-window-close"
+            ></i>
+          </div>
+        </div>
+
         <!-- PARA CUANDO ESTE LOGUEADO -->
         <!-- <iframe src="/assets/sobremi/testinglogo1.png" frameborder="0"></iframe> -->
 
         <input type="hidden" formControlName="portada" />
 
-        <div *ngIf="ESADMIN === 'ADMIN'" class="editarbotones">
+        <div
+          *ngIf="ESADMIN === 'ADMIN' && !editaricon_isshow"
+          class="editarbotones"
+        >
           <div *ngIf="portadaimage !== ''" class="actualizarcontainer">
-            <label for="file_input_update">Actualizar</label>
+            <button mat-raised-button color="secondary"><label for="file_input_update">Actualizar</label></button>
             <input
               (change)="actualizarimg($event)"
               accept="image/*"
               type="file"
               class="file-input__input"
               id="file_input_update"
+              style="display: none;"
             />
           </div>
 
           <div *ngIf="portadaimage == ''" class="agregarcontainer">
-            <label for="file_input_agregar">Agregar</label>
+            <button><label for="file_input_agregar">Agregar</label></button>
             <input
               (change)="agregarimg($event)"
               accept="image/*"
               type="file"
               class="file-input__input"
               id="file_input_agregar"
+              style="display: none;"
             />
           </div>
 
           <div *ngIf="portadaimage !== ''" class="eliminarcontainer">
             <!--*ngIf="portadaimage != null"-->
+
+            <!--
+            <label for="file_input_eliminar"></label>
+
             <button
               (click)="onDelete()"
               class="file-input__input"
@@ -55,6 +86,8 @@
             >
               eliminar
             </button>
+            -->
+
           </div>
         </div>
 
@@ -62,11 +95,15 @@
 
         <!-- PARA CUANDO ESTE LOGUEADO -->
         <ng-container
-          *ngIf="portadaimage != ''; else elseNoImg"
-          ;
+          *ngIf="portadaimage != ''; else elseNoImg";
           class="imgcontainer"
         >
-          <img [src]="portadaimage" />
+          <img
+            [src]="portadaimage"
+            [ngClass]="
+              ESADMIN === 'ADMIN' ? 'opacidadimg-true' : 'opacidadimg-false'
+            "
+          />
         </ng-container>
 
         <!--NO IMG -->
@@ -77,12 +114,16 @@
         <!-- <video src="assets/utilities/videotipo1.mp4"></video> -->
       </div>
 
-      <h1 >{{titulomessage}}</h1>
+      <!-- <h1 >{{titulomessage}}</h1> -->
 
       <div class="descripcion">
         <div class="innerdescripcion">
-          <div class="titulo_contenedor">
-            <div data-aos="fade-right" data-aos-duration="2700">
+          <div class="titulo-contenedor">
+            <div
+              class="inner-titulo-contenedor"
+              data-aos="fade-right"
+              data-aos-duration="2700"
+            >
               <ng-container *ngIf="show; then guardarfalse; else editartrue">
               </ng-container>
 
@@ -91,16 +132,13 @@
                 formControlName="titulo"
                 [readonly]="false"
                 type="text"
-               
               />
 
               <!--<span *ngIf="true">{{testvar}}</span>  [(ngModel)]="testvar"  <p  class="bg-danger" *ngIf="titulo.invalid && titulo.touched">Ingresar titulo</p>-->
-             
-              
+
               <h2 *ngIf="!show">{{ titulomessage }}</h2>
 
               <ng-template #guardarfalse>
-
                 <i
                   (click)="saveTitulo()"
                   (click)="show = !show"
@@ -109,13 +147,13 @@
                 >
                 </i>
 
-               <i
-                (click)="show = !show"
-                *ngIf="ESADMIN == 'ADMIN'"
-                (click)="cerrartitulo()"
-                class='bx bx-arrow-back'>
-               </i>
-
+                <i
+                  (click)="show = !show"
+                  *ngIf="ESADMIN == 'ADMIN'"
+                  (click)="cerrartitulo()"
+                  class="bx bx-arrow-back"
+                >
+                </i>
               </ng-template>
 
               <ng-template #editartrue>
@@ -124,24 +162,23 @@
                   class="bx bx-edit-alt icon3"
                   (click)="show = !show"
                   #editar
-                
                 ></i>
               </ng-template>
 
+              <!--
               <div > 
 
                 <h2>ESSS: .... {{show}}</h2>
-
-                <!--
+                
                 <i
                 (click)="show = !show"
                 *ngIf="ESADMIN == 'ADMIN' && !show"
                 class="bx bx-edit-alt icon2"
-              ></i> 
-                  -->
+                ></i> 
+              
 
               </div>
-
+              -->
             </div>
 
             <!--*ngIf="ESADMIN == 'ADMIN' && estalogueado;-->
@@ -150,24 +187,30 @@
           data-aos-anchor="#trigger-sobremi-h2" -->
           </div>
 
-
           <!-- subtitulo  o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o  o o o o o o   -->
 
-          <ng-container *ngIf="showsubtitulo; then guardarfalsesubtitle; else editartruesubtitle">
-          </ng-container>
-
           <div
+            class="subtitulo-contenedor"
             data-aos="fade-left"
             data-aos-duration="3000"
-            class="subtitulo_contenedor"
           >
             <textarea
               *ngIf="ESADMIN == 'ADMIN' && showsubtitulo"
               formControlName="subtitulo"
               type="text"
-            ></textarea>
+            >
+            </textarea>
 
-            <p *ngIf="!show"> {{ subtitulomessage }} </p>
+            <p *ngIf="!showsubtitulo">{{ subtitulomessage }}</p>
+
+            <ng-container
+              *ngIf="
+                showsubtitulo;
+                then guardarfalsesubtitle;
+                else editartruesubtitle
+              "
+            >
+            </ng-container>
 
             <ng-template #guardarfalsesubtitle>
               <i
@@ -178,18 +221,21 @@
               ></i>
 
               <i
-              (click)="showsubtitulo = !showsubtitulo"
-              *ngIf="ESADMIN == 'ADMIN'"
-              (click)="cerrarsubtitulo()"
-              class='bx bx-arrow-back'></i>
-
+                (click)="showsubtitulo = !showsubtitulo"
+                *ngIf="ESADMIN == 'ADMIN'"
+                (click)="cerrarsubtitulo()"
+                class="bx bx-arrow-back"
+              ></i>
             </ng-template>
 
             <ng-template #editartruesubtitle>
-              <i class="bx bx-edit-alt icon3" *ngIf="ESADMIN =='ADMIN' !showsubtitulo" (click)="showsubtitulo = !showsubtitulo"></i>
+              <i
+                class="bx bx-edit-alt icon3"
+                *ngIf="ESADMIN == 'ADMIN'!; showsubtitulo"
+                (click)="showsubtitulo = !showsubtitulo"
+              ></i>
             </ng-template>
 
-           
             <!--*ngIf="ESADMIN == 'ADMIN' && estalogueado;-->
           </div>
         </div>

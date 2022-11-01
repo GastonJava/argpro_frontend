@@ -6,28 +6,31 @@
   </section>
 
   <section class="sectionpicture">
+
     <app-file-upload
       class="input-field"
       id="img"
       (change)="onSave($event)"
       name="imagen"
-      *ngIf="ESADMIN == 'ADMIN' && imageid == null"
-    >
+      *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid == null : '' ">
+      <!-- *ngIf="ESADMIN == 'ADMIN' && imageid == null" agregar esto ahora mismooo   . . . . . . . -->
+
       <!-- *ngIf="ESADMIN == 'ADMIN' && !(asyncimage | async)"    *ngIf="agregarBtn"-->
     </app-file-upload>
 
     <app-file-update
       (change)="onUpdate($event)"
-      *ngIf="ESADMIN == 'ADMIN' && imageid != null"
-    >
+      *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid != null : '' ">
     </app-file-update>
     <!-- *ngIf="ESADMIN == 'ADMIN' && logueado == 'SILOGUEADO'"   *ngIf="actualizarBtn"-->
 
     <app-file-delete
-      (click)="onDelete()"
-      *ngIf="ESADMIN == 'ADMIN' && imageid != null"
-    >
+    [swal]="alertOpt"
+    (confirm)="confirmarDeleteimg($event)"
+    *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid != null : '' ">
     </app-file-delete>
+    <!-- [swal]="alertOpt" (click)="onDelete()" -->
+
     <!-- *ngIf="ESADMIN == 'ADMIN' && logueado == 'NOLOGUEADO'" *ngIf="eliminarBtn" -->
 
     <!--
@@ -38,11 +41,21 @@
     <h3 *ngIf="logueado == 'NOLOGUEADO'">
       <pre><h5>ESTA LOGUEADO:</h5> no estas logueado</pre>
     </h3>
--->
+    -->
 
     <!--  AQUI APARECE LA IMAGEN DEL PERFIL -->
     <div class="innerpicture">
       <div class="contenedor">
+
+        <i
+        (click)="editar_active = !editar_active" 
+        *ngIf="ESADMIN === 'ADMIN' && !editar_active" 
+        class='bx bx-comment-edit' 
+        matTooltip="editar imagen">
+        </i>
+
+        <i (click)="editar_active = !editar_active" *ngIf="editar_active" class='bx bx-window-close' matTooltip="cerrar editar imagen"></i>
+
         <img
           *ngIf="imageid == null"
           src="assets/header/img-perfil.png"
@@ -59,13 +72,28 @@
   </section>
 
   <section class="sectionsociales">
+    <!--
     <h3>
       <pre><h5>ROL ES: </h5>{{ESADMIN}}</pre>
     </h3>
 
+     <div class="titulorol">
+      <h3>{{ESADMIN}}</h3> 
+    </div>
+    
+    -->
+    
+    
+   
+
     <div class="iconos">
       <div class="p-container">
         <div class="bienvenidocontainer">
+
+          <div class="titulorol">
+            <h3>{{ESADMIN}}</h3> 
+          </div>
+          
           <button
             [disabled]="ismodalopen"
             *ngIf="logueado == 'NOLOGUEADO'"
@@ -117,7 +145,6 @@
         src="assets/header/img-perfil.png"
         alt="avatar usuario"
       />
-      <!--  -->
 
       <img *ngIf="perfilimagen" [src]="perfilimagen" alt="avatar usuario" />
       <!--src="assets/header/gastonavatar.jpeg"-->

@@ -8,12 +8,37 @@
     box-shadow: 1px -4px 14px 0px rgb(0 0 0 / 20%);
 }
 
+//ng class boton de editar imagen {.editarbotones}
+
+.class-editarfalse {
+    background-color: currentColor !important;
+    z-index: 0 !important;
+
+}
+
+.class-editartrue {
+    background-color: #A1B8DDA6 !important;
+    z-index: 1 !important;
+    justify-content: flex-start !important;
+
+}
+
+//imagen principal a opacitar
+.opacidadimg-true {
+    opacity: .4;
+}
+
+.opacidadimg-false {
+    opacity: 1;
+}
+
+
 form {
     height: 100%;
 }
 
 section {
-    background: red;
+    background: black;
     height: calc(100vh - 80px);
     width: 100wh;
     margin-top: 80px;
@@ -70,16 +95,105 @@ section {
 
     .imgcontainer {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         position: relative;
+        flex-direction: column;
         height: 40%;
         width: 90%;
 
+        .icono-editarcontainer {
+            display: flex;
+            justify-content: flex-start;
+            align-items: normal;
+            //background-color: brown;
+            width: 100%;
+            height: 40%;
+
+            .inner-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #103a3a;
+                width: 20%;
+                height: 40%;
+                border-radius: 0px 0px 90px 0px;
+
+                i {
+                    font-size: 50px;
+                }
+            }
+
+            
+        }
+
+        .editarbotones {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           flex-direction: row;
+           width: 100%;
+           height: 45%;
+
+           .agregarcontainer {
+            z-index: 50;
+           }
+
+           .file_input_eliminar {}
+
+        /* ----------------------------------------- */
+
+           .file_input_eliminar {
+            position: relative;
+            height: 30px;
+            width: 100px;
+          }
+          
+          .file_input_eliminar > input[type="file"] {
+            position: absoulte;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        
+            width: 100%;
+          }
+          
+          .file_input_eliminar > label {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background-color: #666;
+            color: #fff;
+            border-radius: 5px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer
+          }
+          
+          input[type="file"]{
+            width: 100% !important;
+            opacity: 1;
+            background-color: burlywood;
+        
+          }
+
+
+          /* ----------------------------------------- */
+
+
+           .actualizarcontainer, .eliminarcontainer {
+             z-index: 1;
+           }
+        }
+
         //medida customizada
         @include rwd(600){
+            background: red;
             width: 60%;
-          
         }
 
         //medida tablet
@@ -89,7 +203,21 @@ section {
 
         //medida notebook
         @include lg(){
-            background-color: aqua;
+
+            //ng class boton de editar imagen {.editarbotones}
+            /*
+            .class-editarfalse {
+                background-color: blue !important;
+                z-index: 0;
+            }
+
+            .class-editartrue {
+                background-color: #A1B8DDA6 !important;
+                z-index: 1;
+            }
+            */
+
+            //background-color: aqua;
         }
 
         //medida monitor
@@ -108,8 +236,10 @@ section {
         }
 
         img {
+            position: absolute;
             width: 100%;
             height: 100%;
+            //opacity: 0.3;
         }
     }
 
@@ -135,11 +265,18 @@ section {
             }
         }
 
-        .titulo_contenedor {
+        .titulo-contenedor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             height: 20%;
             border-bottom: 0.01rem solid #103a3a38;
             position: relative;
+
+            .inner-titulo-contenedor {
+                display: flex;
+            }
 
             // LOG IN
             .icon2 {
@@ -161,8 +298,13 @@ section {
             }
         }
 
-        .subtitulo_contenedor {
-
+        .subtitulo-contenedor {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 65%;
+            //background-color: #103a3a;
             position: relative;
 
             p {
@@ -175,9 +317,8 @@ section {
 
             .icon3 {
                 font-size: 25px;
-                bottom: 5px;
-                right: 15px;
-                position: absolute;
+                width: 20%;
+                height: 80%;
 
             }
         }
@@ -204,6 +345,7 @@ i {
     border: 1px solid #ccc;
     height: 25px;
     padding: 5px;
-    width: 420px;
+    width: 70%;
   }
   
+  .Actualizaciones {}

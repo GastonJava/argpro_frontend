@@ -81,13 +81,13 @@
 
       <div class="title">
 
-        <span>show inputs es: {{showinputs}}</span>
+        <!-- <span>show inputs es: {{showinputs}}</span> -->
 
         <h2 *ngIf="!showinputs" data-aos="fade-right" data-aos-duration="2500">
           educacion & cursos
         </h2>
 
-        <h1>ES ADMIN? {{ESADMIN}}</h1>
+       <!-- <h1>ES ADMIN? {{ESADMIN}}</h1> -->
 
         <div *ngIf="ESADMIN == 'ADMIN'"  class="iconos-wrapper">
 
@@ -133,13 +133,34 @@
 
       <!--data-aos="fade-left" 
       data-aos-duration="2700"-->
-      <div class="containericonos">
+      <div class="containericonos" *ngIf="ESADMIN === 'ADMIN' ">
 
-      </div>
+        <!--
+        <div 
+        class="eliminarcards"
+        *ngIf="!crearcard">
+         <i (click)="crearcard = !crearcard" class='bx bx-window-close eliminarcard-ico'></i>
+        </div>
+        -->
 
-      <div class="nuevocard">
+        <h3>AGREGAR NUEVO CURSO</h3>
+      
+        <div 
+        class="agregarcards" 
+        *ngIf="!crearcard" 
+        matTooltip="AGREGAR CARDS" 
+        matTooltipShowDelay="500" 
+        matTooltipHideDelay="1200">
+          <i (click)="crearcard = !crearcard" class='bx bxs-message-rounded-add agregarcard-ico'></i>
+        </div>
 
-        <form
+   
+
+       <div class="nuevocard" *ngIf="crearcard">
+
+        <i (click)="crearcard = !crearcard" class='bx bxs-minus-square iconm' matTooltip="Cerrar Card" ></i>
+
+        <form  tooltip="Agregar nueva card"
         [formGroup]="form_nuevocard"
         (ngSubmit)="submit_nuevocard()"
         class="form"
@@ -193,14 +214,15 @@
         max="2024-12-31"
         formControlName="datefinal_nuevo"/>
 
-       </div>
+      </div>
      
 
-        <button>Crear Nuevo Card</button>
+        <button tooltip="Agregar nueva card">Crear Nuevo Card</button>
       
        </form>
 
       </div>
+    </div>
 
       <div class="separadorcard" *ngFor="let cardlist of cardlistdatabase, let i = index">
 
@@ -217,7 +239,8 @@
 
             <div class="inner-image">
 
-              <img [ngClass]="login ? 'opacidadActive' : 'opacidadInactive'" class="edu-img" 
+              <img [ngClass]="ESADMIN === 'ADMIN' ? 'opacidadActive' : 'opacidadInactive'" 
+              class="edu-img" 
               src="/assets/educacion/issd.jpg" alt=""
               [src]="('data:image/jpg;base64,' + cardlist.thumbnailString)"
               />
@@ -248,15 +271,20 @@
 
           <div class="main">
             <div class="main-container">
+
+
+              <i
+              [swal]="alertDeleteOpt"
+              (confirm)="AlertDeleteCard(cardlist.id)"
+              *ngIf="ESADMIN === 'ADMIN'" 
+              class='bx bxs-trash'>
+              </i>
+
+
               <div class="title1">
                 <div class="title1-h2">
 
-                  
-
-                  <h2 *ngIf="!showinputscardtitulo" >{{cardlist.titulocard}}</h2>
-
-
-                 
+                  <h2 *ngIf="!this.toggle_titulo[i]" >{{cardlist.titulocard}}</h2>
 
                   <!-- LOG IN -->
                   <i 
@@ -265,9 +293,9 @@
                   (click)="this.toggle_titulo[i] = !this.toggle_titulo[i]"></i>
                    <!-- (click)="showinputscardtitulo = !showinputscardtitulo" -->
 
-                  <pre>TOGGLE DE EDIT ESTA AQUI:  {{ this.toggle_titulo[i] ? 'Enabled' : 'Disabled'}}</pre>
+                 <!-- <pre>TOGGLE DE EDIT ESTA AQUI:  {{ this.toggle_titulo[i] ? 'Enabled' : 'Disabled'}}</pre> -->
 
-                  <div class="iconsosteiner">
+                  <div class="iconsosteiner" *ngIf="ESADMIN === 'ADMIN'">
                   
                     <button [disabled]="titulocard.length < 5">
 
@@ -283,7 +311,6 @@
 
                       <i  
                       *ngIf="this.toggle_titulo[i]" 
-                      (click)="clickcard(i)" 
                       class='bx bx-window-close icon-edit3 cerrar'
                       (click)="this.toggle_titulo[i] = !this.toggle_titulo[i]"> <!-- (click)="showinputscardtitulo = !showinputscardtitulo" --></i>
                     </div>
@@ -291,13 +318,9 @@
 
                   <input *ngIf="this.toggle_titulo[i]" type="text" formControlName="titulocard" id="titulocard">
                   <span></span>
-
-
-
-
       
-
                 </div>
+
 
                 <div class="subtitle-container">
 
@@ -309,33 +332,41 @@
 
                     <!-- LOG IN -->                    <!-- LOG IN -->
 
-                    <div class="iconsosteiner">
-                     <i class='bx bx-edit-alt icon-edit3' 
-                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
-                     *ngIf="ESADMIN == 'ADMIN' && !toggle_subtitulo[i]"></i>
+                    <div class="iconsosteiner" *ngIf="!toggle_subtitulo[i]"> <!-- sdgggggggggggggggggggggggggggggggg gdssssssssssseg wweeeerg grwgwrgg -->
 
-                     <br>
-                     <button 
-                     [disabled]="subtitulocard.length < 5">
-                     <i class="bx bxs-save icon-edit3 guardar" 
-                     (click)="ActualizarSubtituloCard(cardlist.id)" 
-                     *ngIf="toggle_subtitulo[i]" 
-                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]"></i>
+                    <i class='bx bx-edit-alt icon-edit3' 
+                    *ngIf="ESADMIN == 'ADMIN' && !toggle_subtitulo[i]"
+                    (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]">
+                    </i>
 
-                     </button>
-                     <br>
-                     <i class='bx bx-window-close icon-edit3 cerrar' 
-                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
-                     *ngIf="toggle_subtitulo[i]"></i>
+                    <br>
 
                     </div> 
+
+
+                    <button [disabled]="subtitulocard.length < 5">
+
+                    <i class="bx bxs-save icon-edit3 guardar" 
+                    *ngIf="toggle_subtitulo[i]"
+                    (click)="ActualizarSubtituloCard(cardlist.id)" 
+                    (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]">
+                    </i>
+
+                    <!-- <p>{{toggle_subtitulo[i]}}</p> -->
+
+                    </button> 
+                    <br>
+                    <i class='bx bx-window-close icon-edit3 cerrar' 
+                    *ngIf="toggle_subtitulo[i]"
+                     (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]">
+                    </i>
+
 
                     <!-- FORM PARA SUBTITULO card -->
                     <input *ngIf="toggle_subtitulo[i]" type="text" formControlName="subtitulocard" id="subtitulocard" placeholder="subtitulo card">
                     <div *ngIf="toggle_subtitulo[i] && subtitulocard.length < 5">
-                      Name must be at least 5 characters long.
+                      <!-- Name must be at least 5 characters long. -->
                     </div> 
-
 
                   </div>
 
@@ -362,12 +393,12 @@
                     *ngIf="toggle_fechatitulo[i]" 
                     (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]">
                     </i>
-                   </button>
+                  </button>
     
-                    <i class='bx bx-window-close icon-edit3 cerrar'
-                    (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]" 
-                    *ngIf="toggle_fechatitulo[i]">
-                    </i>
+                  <i class='bx bx-window-close icon-edit3 cerrar'
+                  (click)="toggle_fechatitulo[i] = !toggle_fechatitulo[i]" 
+                  *ngIf="toggle_fechatitulo[i]">
+                  </i>
 
                  </div>
 
@@ -442,7 +473,7 @@
 
                     <i (click)="toggle_fecha[i] = !toggle_fecha[i]" 
                     *ngIf="toggle_fecha[i]" 
-                    class='bx bx-window-close icon-edit3 cerrar'></i>
+                    class='bx bx-window-close icon-edit3f cerrar'></i>
 
                     <i class="bx bxs-save icon-editfecha guardar"
                     (click)="ActualizarFechascard(cardlist.id)"
@@ -481,7 +512,7 @@
            data-aos-duration="2000"
            class="texto-medio"
           >
-            <p>INSTITUTO SUPERIOR SANTO DOMINGO</p>
+            <p>seccion de educacion</p>
 
             <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-editfooter' (click)="clickcard(i)"></i>            
 

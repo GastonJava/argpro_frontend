@@ -3,11 +3,14 @@ import { NgModule } from "@angular/core";
 import { ObserverinputComponent } from "./observerinput.component";
 
 
+
 @NgModule({
     imports: [
       CommonModule
     ],
-    declarations: [ ObserverinputComponent ],
+    declarations: [	 ObserverinputComponent,
+      //TooltipDirective
+   ],
     exports: [ ObserverinputComponent ]
   })
   export class ObserverinputModule { }

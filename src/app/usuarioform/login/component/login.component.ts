@@ -204,6 +204,7 @@ export class LoginComponent implements OnInit {
             this.imageService.changePerfilUserImageValue(null);
           }
             
+          this.router.navigate(['/']);
           //this.localStorage.setStorageEstalogueado("eslogin", true);
 
          // SI EL TOKEN ES NULL O EXPIRO 

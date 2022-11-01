@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { EsadminService } from '../share/services/esadmin.service';
 import { ImagestorageService } from '../share/services/imagestorage.service';
 import { LocalstorageService } from '../share/services/localstorage.service';
@@ -16,6 +17,11 @@ import { ImagenService } from '../_services/imagen.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  alertOpt: SweetAlertOptions = {}
+
+  //variable para editar imagen de portfolio, al clickear activa los botones de editar la imagen
+  editar_active: boolean = false;
 
   //variables de mostrar o esconder botones...
   agregarBtn: boolean;
@@ -71,6 +77,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     console.log("ON INIT DEL HEADER: ------------------------------------ ");
+
+    this.alertOpt = {
+      title: 'Desea eliminar imagen?',
+      text: '',
+      toast: false,
+      titleText: '',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      
+    };
 
     if (this.estaLogueado()) {
       console.log("logueado");
@@ -322,6 +338,7 @@ export class HeaderComponent implements OnInit {
   }
 
   //al borrar imagen
+  
   onDelete() {
     console.log("delete . . .");
     if (this.imageid != null || this.imageid != 0) {
@@ -336,8 +353,6 @@ export class HeaderComponent implements OnInit {
             //eliminamos imagen del storage
             this.localStorageImage.changeImageValue(null);
             this.localStorageImage.eliminarStorageImages("updateImagePreview");
-
-
           }
         },
         (error: any) =>{
@@ -350,6 +365,7 @@ export class HeaderComponent implements OnInit {
     console.log("No hay imagen para actualizar");
 
   }
+  
 
   cerrarsession() {
 
@@ -370,6 +386,44 @@ export class HeaderComponent implements OnInit {
     this.localStorage.changeTokenValue(null);
     this.localStorage.clearStorage();
 
+  }
+
+  // SweetAlert2 ----- ------------- -----------
+  confirmarDeleteimg($event){
+    console.log($event);
+
+    Swal.fire({
+      position: 'center',
+      title: 'Seguro desea borrar?',
+      text: 'podra volver a subir otra imagen.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar imagen.',
+      cancelButtonText: 'No, no borrar'
+    }).then((result) => {
+      if (result.value) {
+
+        this.onDelete();
+
+        Swal.fire(
+          'Eliminado!',
+          'Imagen Borrada Correctamente.',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Imagen No Borrada :)',
+          'error'
+        )
+      }
+    })
+
+   
+  }
+
+  cancelDeleteimg($event){
+    console.log($event);
   }
 
 

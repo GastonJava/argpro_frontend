@@ -60,6 +60,10 @@ public s_updatetitulocard<T>(titulocard: FormData): Observable<any>{
  return this.http.post(`${environment.apiUrl}seccion/educacion/updatefechascard`,fechasData);
  }
 
+ public s_deletecard<T>(id): Observable<any> {
+  return this.http.delete(`${environment.apiUrl}seccion/educacion/deletecards/${id}`);
+ }
+
  //crear nueva card
  public s_crearnuevacard<T>(educacioncardmodel: FormData): Observable<any>{
   debugger

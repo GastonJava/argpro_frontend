@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { EsadminService } from '../share/services/esadmin.service';
 import { LocalstorageService } from '../share/services/localstorage.service';
 import { EducacioncardModel } from '../_models/educacioncardmodel';
@@ -13,6 +14,14 @@ import { EduService } from './servicios/edu.service';
 })
 export class EducacionComponent implements OnInit {
 
+  //alert delete opcioon
+  alertDeleteOpt: SweetAlertOptions = {};
+
+
+  //toggle mostrar icnos o formulario crear card
+  crearcard: boolean = false;
+
+  // rol del usuario
   ESADMIN: String;
 
   //seleccionar iconos edit
@@ -84,6 +93,17 @@ export class EducacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    //sweet alert options in delete
+    this.alertDeleteOpt = {
+      title: 'Eliminar el Curso?',
+      text: '',
+      toast: false,
+      titleText: '',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      
+    };
     
    this.localstorageService.getRolValue$().pipe(map(rol =>{ this.ESADMIN = rol, console.log(rol)})).subscribe();
 
@@ -210,7 +230,7 @@ export class EducacionComponent implements OnInit {
     return this.eduservices.getcardlist().pipe(map(cards => {
       this.cardlistdatabase = cards;
       console.log(this.cardlistdatabase);
-      debugger
+    
     })).subscribe();
   }
 
@@ -233,7 +253,7 @@ export class EducacionComponent implements OnInit {
 
     this.eduservices.s_crearnuevacard(educacioncardm).pipe(map(data => {
       console.log(JSON.stringify(data));
-      debugger
+
     })).subscribe();
 
   }
@@ -258,7 +278,6 @@ export class EducacionComponent implements OnInit {
 
     this.eduservices.getThumbnailcardPreview(thumbnaildata).pipe(map(thumbnail => {
         this.thumbnailpreview = thumbnail.imagecardPreviewts;
-        debugger
     })).subscribe();
   }
 
@@ -283,7 +302,6 @@ export class EducacionComponent implements OnInit {
         next: data => {
 
           console.log(data);
-          debugger
 
           this.Cardlist();
           
@@ -303,7 +321,6 @@ export class EducacionComponent implements OnInit {
       //console.log(" xd : - - - "+JSON.parse(<any>dato).titulocard);
   
       this.Cardlist();
-      debugger
       
     })).subscribe();
     console.log("HOASODSDASDASDAS ASD ASDAS D ASDASD ASD ADASDASDASDD D AS D AD AS D ASD ASD A DA SD AS DDD D D D DD  D D D DD D DSSSS ");
@@ -328,7 +345,6 @@ export class EducacionComponent implements OnInit {
     this.eduservices.s_updatetitulofechacard(titulofechacarddata).pipe(map(dato =>
       {
         this.Cardlist();
-        debugger
       })).subscribe();
     console.log("HOASODSDASDASDAS ASD ASDAS D ASDASD ASD ADASDASDASDD D AS D AD AS D ASD ASD A DA SD AS DDD D D D DD  D D D DD D DSSSS ");
   }
@@ -355,9 +371,46 @@ export class EducacionComponent implements OnInit {
     console.log("actualizar fecha . . . ");
   }
 
-  clickcard(item){
-    //this.toggle_edit[item] = !this.toggle_edit[item];
-    //console.log(this.toggle_edit[item]);
+  //metodo de eliminar card
+  public Deletecard (id){
+    this.eduservices.s_deletecard(id).pipe(map(del =>
+      
+      //cuando es FALSE, significa que se borro el curso exitosamente
+      console.log(del)
+       
+      )).subscribe();
+  }
+
+  //metodos para eliminar y aceptar 
+  public AlertDeleteCard(id){
+
+    Swal.fire({
+      position: 'center',
+      title: 'Desea borrar el curso?',
+      text: 'podra volver a crear nuevos Cursos.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar card.',
+      cancelButtonText: 'No, no borrar'
+    }).then((result) => {
+      if (result.value) {
+
+        this.Deletecard(id);
+
+        Swal.fire(
+          'Eliminado!',
+          'Imagen Borrada Correctamente.',
+          'success'
+        )
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'Curso No Borrado :)',
+          'error'
+        )
+      }
+    })
+
   }
 
 

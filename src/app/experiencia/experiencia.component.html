@@ -1,5 +1,5 @@
 
-<h1>{{ ESADMIN }}</h1>
+<!-- <h1>{{ ESADMIN }}</h1> -->
 
 <div class="all">
 
@@ -83,7 +83,7 @@
      </ng-template>
 
       <!-- LOG IN -->
-      <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit1' (click)="clickcard(i)"></i>
+      <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit1'></i>
    </div>
 
    <div class="cards">
@@ -94,7 +94,7 @@
       <i *ngIf="showcardinput" class="bx bx-arrow-back nuevabackcard" (click)="showcardinput = !showcardinput"></i>
     </div>
 
-    <h1>el showcardinut es: {{showcardinput}}</h1>
+    <!-- <h1>el showcardinut es: {{showcardinput}}</h1> -->
 
     <ng-template [ngIf]="showcardinput">
 
@@ -132,13 +132,18 @@
 
    </ng-template>
 
-    <!-- fffffffffffffffffffff -->
-    <cdk-virtual-scroll-viewport itemSize="400" class="card shadow-1 card1">
+    <!-- <cdk-virtual-scroll-viewport itemSize="400" class="card shadow-1 card1"> -->
+    
+    <div class="card shadow-1 card1">
+
+  
+
    
   
     <!-- <img [src]="cardlistdatabase.imagencardString" /> -->
    
-    <mat-card *cdkVirtualFor="let cardlist of cardlistdatabase, 
+    <!-- <mat-card *cdkVirtualFor="let cardlist of cardlistdatabase -->
+    <mat-card *ngFor="let cardlist of cardlistdatabase, 
       let i = index;
       let par = even;
       let impar = odd; 
@@ -156,7 +161,7 @@
 
         <mat-card-title class="card-title">
 
-          <p *ngIf="!showinsidecardtitulo" data-aos="fade-right" data-aos-duration="2900">
+          <p *ngIf="!showinsidecardtitulo" > <!-- data-aos="fade-right" data-aos-duration="2900" retomar -->
             {{cardlist.titulo}}
           </p>
 
@@ -166,13 +171,13 @@
           <ng-template [ngIf]="ESADMIN == 'ADMIN'">
             <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="!showinsidecardtitulo" class='bx bxs-edit-alt icon-edit2 editar '></i>
             <i (click)="ActualizarTitulo(cardlist.id)" *ngIf="showinsidecardtitulo" (click)="showinsidecardtitulo = !showinsidecardtitulo" class="bx bxs-save icon-edit3 guardar"></i>
-            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="showinsidecardtitulo" class='bx bx-window-close icon-edit3 cerrar' (click)="clickcard(cardlist.id)"></i>
+            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="showinsidecardtitulo" class='bx bx-window-close icon-edit3 cerrar'></i>
           </ng-template>
           
   
         </mat-card-title>
   
-        <mat-card-subtitle class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
+        <mat-card-subtitle class="card-parrafo"> <!--  data-aos="fade-up" data-aos-duration="2400" retomar-->
   
           <p *ngIf="!showinsidecardsubtitulo" id="p">
             {{cardlist.subtitulo}}
@@ -181,15 +186,15 @@
   
           <!-- LOG IN -->
           <ng-template [ngIf]="ESADMIN == 'ADMIN'">
-            <i *ngIf="!showinsidecardsubtitulo" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class='bx bx-edit icon-edit3 editar' (click)="clickcard(cardlist.id)"></i>
+            <i *ngIf="!showinsidecardsubtitulo" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class='bx bx-edit icon-edit3 editar'></i>
             <i *ngIf="showinsidecardsubtitulo" (click)="ActualizarSubtitulo(cardlist.id)" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class="bx bxs-save icon-edit3 guardar" ></i>
-            <i (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" *ngIf="showinsidecardsubtitulo" class='bx bx-window-close icon-edit3 cerrar' (click)="clickcard(cardlist.id)"></i>
+            <i (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" *ngIf="showinsidecardsubtitulo" class='bx bx-window-close icon-edit3 cerrar'></i>
           </ng-template>
           
   
         </mat-card-subtitle>
   
-        <mat-card-content class="card-img" data-aos="fade-down" data-aos-duration="2000">
+        <mat-card-content class="card-img"> <!-- data-aos="fade-down" data-aos-duration="2000" retomar -->
   
           <div class="container-img">
   
@@ -200,13 +205,6 @@
               intrinsicsize="200x90"
               alt="imagen exp"
             />
-
-           
-      
-
-            <!-- <p>{{cardlist[i].imagencard}}</p> [src]="cardlist[i].imagencard"-->
-
-           <!-- <img [src]="imagecardPreviewts" alt="imagene debe mostarse"> -->
   
             <!-- LOG IN -->
             <ng-template [ngIf]="ESADMIN == 'ADMIN'">
@@ -233,175 +231,9 @@
 
       </mat-card>
 
-    </cdk-virtual-scroll-viewport>
- 
-    <!-- fffffffffffffffffffff -->
-
-    <!--
-    <div *ngFor="let cardlist of cardslist, let i = index" class="card shadow-1 card1">
-
-      <div class="card-title">
-
-        <p data-aos="fade-right" data-aos-duration="2900">
-          {{cardlist.title}}
-        </p>
-
-        LOG IN 
-        <i *ngIf="login" class='bx bxs-edit-alt icon-edit2' (click)="clickcard(i)"></i>
-
-      </div>
-
-      <div class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
-
-        <p>
-          {{cardlist.subtitle}}
-        </p>
-
-        LOG IN
-        <i *ngIf="login" class='bx bx-edit icon-edit3' (click)="clickcard(i)"></i>
-
-      </div>
-
-      <div class="card-img" data-aos="fade-down" data-aos-duration="2000">
-
-        <div class="container-img">
-
-          <img
-            src="{{cardlist.url}}"
-            intrinsicsize="200x90"
-            alt="imagen exp"
-          />
-
-          LOG IN
-          <i *ngIf="login" class='bx bx-edit icon-edit4' (click)="clickcard(i)"></i>
-
-        </div>
-        
-      </div>
-
-    </div>
-    -->
-
-    <!--
-    <div *ngFor="let cardlist of cardslist" class="card shadow-1 card2">
-      <div class="card-title">
-        <p data-aos="fade-right" data-aos-duration="2900">{{cardlist.title}}</p>
-      </div>
-
-      <div class="card-parrafo" data-aos="fade-up" data-aos-duration="2400">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img" data-aos="fade-down" data-aos-duration="2000">
-        <img src="" alt="imagen exp" />
-      </div>
     </div>
 
-    <div class="card shadow-1 card3">
-      <div class="card-title">
-        <p>Experiencia numero 2</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-
-    <div class="card shadow-1 card4">
-      <div class="card-title">
-        <p>Experiencia numero 3</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-
-    <div class="card shadow-1 card5">
-      <div class="card-title">
-        <p>Experiencia numero 4</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-
-    <div class="card shadow-1 card6">
-      <div class="card-title">
-        <p>Experiencia numero 5</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-
-    <div class="card shadow-1 card7">
-      <div class="card-title">
-        <p>Experiencia numero 6</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-
-    <div class="card shadow-1 card8">
-      <div class="card-title">
-        <p>Experiencia numero 7</p>
-      </div>
-
-      <div class="card-parrafo">
-        <p>
-          Proyecto de Web api de busqueda, edicion y eliminacion de peliculas y
-          personajes junto a su imagen.
-        </p>
-      </div>
-
-      <div class="card-img">
-        <img src="" alt="imagen exp" />
-      </div>
-    </div>
-   -->
+   <!-- </cdk-virtual-scroll-viewport> -->
 
   </div>
 </div>

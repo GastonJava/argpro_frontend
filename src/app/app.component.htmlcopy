@@ -21,6 +21,34 @@
  <app-observerinput></app-observerinput>
 -->
 
+<!-- section slideThree -->
+<section title=".slideThree">
+
+  <!--
+  <h3 *ngIf="logueado == 'SILOGUEADO'"> 
+    <pre><h5>ESTA LOGUEADO:</h5> estas logueado</pre>
+  </h3>
+
+  <h3 *ngIf="logueado == 'NOLOGUEADO'"> 
+    <pre><h5>ESTA LOGUEADO:</h5> no estas logueado</pre>
+  </h3>
+  -->
+
+  <h3>
+    <pre><h5>ROL ES: </h5>{{ESADMIN}}</pre>
+
+  </h3>
+
+  <!-- .slideThree -->
+  <!---->
+  <div class="slideThree">  
+    <input type="checkbox" value="None" id="slideThree" name="check" checked />
+    <label for="slideThree"></label>
+  </div>
+  <!-- end .slideThree -->
+</section>
+
+
 
 <app-header></app-header>
 
