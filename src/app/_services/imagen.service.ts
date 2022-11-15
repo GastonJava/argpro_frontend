@@ -36,7 +36,6 @@ import { Imagen } from "../_models/imagen";
 
     /* del tipo generico */
     public uploadimg<T> (imagenModel: T):  Observable<any>{
-      debugger
       return this.http.post(`${environment.apiUrl}seccion/navbar/upload`, imagenModel);
     }
 

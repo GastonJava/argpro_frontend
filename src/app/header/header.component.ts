@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   actualizarBtn: boolean;
   eliminarBtn: boolean;
 
-  //ismodalopen$: Observable<boolean>;
   navbarimage: boolean;
 
   imageid: any;
@@ -71,12 +70,11 @@ export class HeaderComponent implements OnInit {
     private localStorageImage: ImagestorageService
   ) {
 
-    this._ismodalopen.currentValue.subscribe(message => console.log(`subcripcion: esta modal abierto?: ${this.ismodalopen = message}`)); //subscribe to the currentValue observable.
-    //this.ismodalopen$ = this._ismodalopen.currentValue.pipe(map(state => state));
+    this._ismodalopen.currentValue.subscribe(message =>
+       `${this.ismodalopen = message}`); //subscribe to the currentValue observable.
   }
 
   ngOnInit() {
-    console.log("ON INIT DEL HEADER: ------------------------------------ ");
 
     this.alertOpt = {
       title: 'Desea eliminar imagen?',
@@ -89,7 +87,6 @@ export class HeaderComponent implements OnInit {
     };
 
     if (this.estaLogueado()) {
-      console.log("logueado");
       this.localStorage.changeLogueadoValue$("SILOGUEADO");
 
       if (this.localStorage.getStorageRole("role") == "ADMIN") {
@@ -104,13 +101,11 @@ export class HeaderComponent implements OnInit {
 
       }
 
-
     } else {
 
       this.localStorage.changeLogueadoValue$("NOLOGUEADO");
 
       this.localStorage.changeRolValue$("INVITADO");
-      console.log("no logueado");
 
     }
 
@@ -120,16 +115,13 @@ export class HeaderComponent implements OnInit {
 
     //si el token existe
     this.TraerUsuarioToken();
-    //console.log("funciona o no funciona " + this.estalogueado);
+
 
     //ES ADMIN ???? 
     this.TraerUsuarioRole();
 
-    //this.asynclogueado = this.localStorage.getLogueadoValue$();
-
     //escuchamos los datos del usuario nombre email e imagen
     this.localStorage.currentUserData$.subscribe((data) => {
-      //console.log("el dato NOMBRE en el header del nginit y del currentUserData es: "+data.nombre);
       this.nombreusuario = data.nombre;
     });
 
@@ -138,7 +130,6 @@ export class HeaderComponent implements OnInit {
       this.perfilimagen = imagen;
     });
 
-    /* no sacar esto que anda bien*/
     this.base64imagenbyte = this.localStorageImage.getStorageimages("updateImagePreview");
     this.localStorageImage.changeImageValue(this.base64imagenbyte);
     /* no sacar esto que anda bien*/
@@ -152,9 +143,7 @@ export class HeaderComponent implements OnInit {
 
     //traemos la imagen de del observable this.base64imagen =  
     this.asyncimage = this.localStorageImage.currentImage$.pipe(map(data => this.base64imagen = data));
-    //this.asynclogueado = this.localStorage.getLogueadoValue$.pipe(map(data => console.log("la data dentro del localstorage loguao: "+data)));
     this.localStorage.getLogueadoValue$().subscribe(data => this.logueado = data);
-    console.log("limagen tiene es: " + this.base64imagenbyte);
 
     //this.MostrarBotones();
     
@@ -167,7 +156,6 @@ export class HeaderComponent implements OnInit {
       this.base64 = 'data:image/jpg;base64,' + data.imagenbyte;
 
       //get id guardar en observable y localstorage
-
 
       this.localStorageImage.setStorageImages("updateImagePreview", this.base64);
       this.localStorageImage.changeImageValue(this.base64);
@@ -202,8 +190,6 @@ export class HeaderComponent implements OnInit {
 
   TraerUsuarioRole() {
     this.esadminservice.currentValue.subscribe((data) => {
-      //this.esadmin = data;
-      console.log("es admin en SOBREMI - oninit: " + data);
     });
   }
 
@@ -227,15 +213,7 @@ export class HeaderComponent implements OnInit {
 
     }
 
-
     return true;
-  }
-
-  ngAfterViewInit() {
-    //console.log("is VALID???: "+this.ismodalopen$);
-    //this.ismodalopen$ = this._ismodalopen._ismodalopen.pipe(map(state => state));
-    //this.ismodalopen$ = this._ismodalopen._ismodalopen.asObservable();
-    //console.log("true o false?: "+this.ismodalopen$.pipe(filter(state => state)));
   }
 
   //abrir dialogo modal al presionar boton (editar texto)
@@ -252,7 +230,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onSave($event) {
-    console.log("save . . . ");
 
     if (this.ESADMIN == "ADMIN") {
 
@@ -267,25 +244,17 @@ export class HeaderComponent implements OnInit {
         this.imagenservice.uploadimg(imageFormData).pipe(
           map(
             (data) => {
-              console.log((<any>data).imagenbyte);
               const imageid = (<any>data).id;
               const previewBase64 = (<any>data).imagenbyte;
 
               this.base64 = 'data:image/jpg;base64,' + previewBase64;
            
-
-              // --------------------------------------------------------------------------- AREA DE TESTEOSSSSSS LUEGO BORRARRRRRRRR
-
-              console.log();
               //necesitamos enviar el id al loal storage y cambiar observable
               this.localStorageImage.setStorageImagesId("imageid", imageid);
               this.localStorageImage.changeImageidValue(imageid);
 
               this.localStorageImage.setStorageImages("updateImagePreview", this.base64);
               this.localStorageImage.changeImageValue(this.base64);
-
-
-              // --------------------------------------------------------------------------- AREA DE TESTEOSSSSSS LUEGO BORRARRRRRRRR
 
             },
             (error: any) => {
@@ -302,7 +271,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onUpdate($update) {
-    console.log("update . . .");
 
     if (this.ESADMIN == "ADMIN") {
 
@@ -329,10 +297,7 @@ export class HeaderComponent implements OnInit {
             },
             (error: any) => { console.log(error) }
           )).subscribe();
-
       }
-
-      console.log("imagen id es null no hay imagen: ");
     }
 
   }
@@ -340,11 +305,9 @@ export class HeaderComponent implements OnInit {
   //al borrar imagen
   
   onDelete() {
-    console.log("delete . . .");
     if (this.imageid != null || this.imageid != 0) {
       this.imagenservice.deleteimg(this.imageid).pipe(map(
         (data) => {
-          console.log(data);
           if(data){
             //this.localStorageImage.setStorageImagesId("imageid", 0);
             this.localStorageImage.changeImageidValue(null);
@@ -356,13 +319,10 @@ export class HeaderComponent implements OnInit {
           }
         },
         (error: any) =>{
-
         }
 
       )).subscribe();
     }
-
-    console.log("No hay imagen para actualizar");
 
   }
   
@@ -372,8 +332,8 @@ export class HeaderComponent implements OnInit {
     this.localStorage.eliminarStorage("token");
 
     // ------------------- ROLE ------------------------//
-    this.localStorage.setStorageRole("role", "INVITADO"); //------------------------------------- CAMBIAR AQUI (this.localStorage.setStorageRole("role", "USUARIO")) ----------------------------------------------------------------------
-    this.localStorage.changeRolValue$("INVITADO"); // ------------------------------------------- CAMBIAR AQUI (this.localStorage.changeRolValue$("USUARIO");) --------------------------------------
+    this.localStorage.setStorageRole("role", "INVITADO"); 
+    this.localStorage.changeRolValue$("INVITADO");
     this.localStorage.eliminarStorage("role");
 
     // ------------------- LOGUEADO -----------------------//
@@ -390,7 +350,6 @@ export class HeaderComponent implements OnInit {
 
   // SweetAlert2 ----- ------------- -----------
   confirmarDeleteimg($event){
-    console.log($event);
 
     Swal.fire({
       position: 'center',
@@ -423,8 +382,6 @@ export class HeaderComponent implements OnInit {
   }
 
   cancelDeleteimg($event){
-    console.log($event);
   }
-
 
 }

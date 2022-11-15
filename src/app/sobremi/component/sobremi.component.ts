@@ -96,19 +96,11 @@ export class SobremiComponent implements OnInit {
       subtitulo: ['']
      });
 
-     //this.form.get('titulo').valueChanges.pipe(map(titulo => this.titulomessage = titulo)).subscribe();
-
-  
-     console.log("SOBRE MI ON INITTTTT ");
-
      //traemos desde localstorage el rol
      const rol = this.localstorageService.getStorageRole("role");
      this.localstorageService.changeRolValue$(rol);
 
-
      this.localstorageService.getRolValue$().pipe(map(data => this.ESADMIN = data)).subscribe();
-
-     console.log("sobremi: " + this.ESADMIN);
 
      this.localstorageService.currentUserToken$.subscribe((logueado) => {
       if (logueado == "" || logueado == null) {
@@ -146,7 +138,6 @@ export class SobremiComponent implements OnInit {
 
    
 
-        console.log("entro en agregar image");
         this.simplefile = $event.target.files[0];
 
         let imageFormData = new FormData();
@@ -156,8 +147,7 @@ export class SobremiComponent implements OnInit {
         this.sobremiservice.uploadimg(imageFormData).pipe(
           map(
             (data) => {
-              console.log("agrego  la imagenenenenen ");
-              console.log((<any>data).portada);
+
               this.sobremiid = (<any>data).id;
               const previewBase64 = (<any>data).portada;
               this.portadaimage = 'data:image/jpg;base64,' + previewBase64;
@@ -170,8 +160,6 @@ export class SobremiComponent implements OnInit {
 
               this.sobremichanges.changeSobremiImageValue(this.portadaimage);
               this.sobremiLocalStorage.setStorageSobremiImage("storageSobremiImage", this.portadaimage);
-              
-
 
             },
             (error: any) => {
@@ -186,7 +174,6 @@ export class SobremiComponent implements OnInit {
 
   //actualizar imagen
   actualizarimg($update) {
-    console.log("SOBRE MI SOBRE MI SOBREMI ACTUALIZARIMG");
 
     if (this.ESADMIN == "ADMIN") {
 
@@ -203,8 +190,6 @@ export class SobremiComponent implements OnInit {
             (data) => {
               const previewBase64 = (<any>data).portada;
               //const sobremiId = (<any>data).sobremiid;
-
-
               if (previewBase64) {
                 this.portadaimage = 'data:image/jpg;base64,' + previewBase64;
 
@@ -226,42 +211,16 @@ export class SobremiComponent implements OnInit {
 
   //al borrar imagen
   onDelete() {
-    console.log("delete . . .");
     if (this.sobremiid != null || this.sobremiid != 0) {
       this.sobremiservice.deleteimg(this.sobremiid).pipe(map(
         (data) => {
-          console.log(data);
+
           if (data) {
-            //this.localStorageImage.setStorageImagesId("imageid", 0);
-
-
-
-
-
-
             this.sobremichanges.changeSobremiIdValue(0);
             this.sobremichanges.changeSobremiImageValue('');
             this.sobremiLocalStorage.eliminarSobremiStorage("sobremiid");
             this.sobremiLocalStorage.eliminarSobremiStorage('storageSobremiImage');
 
-
-
-
-
-
-
-
-            // al eliminar deberia borrarse el storage id
-            //this.sobremiLocalStorage.setStorageSobremiId("sobremiid", this.sobremiid);
-
-
-
-
-
-            //eliminamos imagen del storage
-            //this.portadaimage = '';
-           
-            
           }
         },
         (error: any) => {
@@ -271,22 +230,18 @@ export class SobremiComponent implements OnInit {
       )).subscribe();
     }
 
-    console.log("No hay imagen para actualizar");
 
   }
 
   //TODO: guardar titulo
   saveTitulo(){
-    console.log("save tituloooooo");
     let titulodata = new FormData();
     const titulo = this.form.get('titulo').value;
     //this.subtitulomessage = this.form.get('subtitulo').value;
     if(titulo.length <= 0){
-      console.log("que significa it");
       return;
     }
     
-    console.log("que significa it despues de return");
     titulodata.append('titulo', titulo);
 
 
@@ -311,27 +266,21 @@ export class SobremiComponent implements OnInit {
     let subtitulodata = new FormData();
    
     if(subtitulo.length <= 0){
-      console.log("esta vacio asique nos vamos...");
       return;
     }
 
-    console.log("despues del return... esto no saldra");
-
     subtitulodata.append('subtitulo', subtitulo);
-    //this.sobremiTextoData.append('subtitulo', this.subtitulomessage);
+
     this.sobremiservice.updatesubtitulo(subtitulodata).pipe(map(
       
       subtitulo => this.subtitulomessage = subtitulo.subtitulo
-      //this.titulomessage = texto.titulo;
-      //this.subtitulomessage = texto.subtitulo;
+
     )).subscribe();
     
   }
 
   cerrarsubtitulo(){
     this.form.get('subtitulo').setValue("");
-    console.log("volver atras ");
-    //this.show = false;
   }
   
 

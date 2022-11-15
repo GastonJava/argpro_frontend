@@ -42,47 +42,14 @@ export class EducacionComponent implements OnInit {
   showinputs: boolean = false;
 
   //toggle de card form
-  showinputscardimg: boolean = false;
+  showinputscardimg = {}
+  //showinputscardimg: boolean = false;
   //showinputscardtitulo: boolean = false;
   showinputscardfechatitulo: boolean = false;
   showinputfecha: boolean = false;
 
   //imagen thumbnail preview
   thumbnailpreview: any;
-
-  /*
-  cardslist: {id: number, title: string, subtitle: string, fechatitle: string, thumbnail: string, fechainicial: any}[] = [
-
-    {
-      id: 1,
-      title: 'Experiencia numero 1',
-      subtitle: 'ISSD Instituto Santo Domingo.',
-      fechatitle: 'PERIODO DE FINALIZACION',
-      thumbnail: 'assets/education/issd.jpg',
-      fechainicial: ''
-    },
-
-    {
-      id: 2,
-      title: 'Experiencia numero 2',
-      subtitle: 'Ipem 35 Ricardo Rojas.',
-      fechatitle: 'PERIODO DE FINALIZACION',
-      thumbnail: 'assets/education/issd.jpg',
-      fechainicial: ''
-    },
-
-    {
-      id: 3,
-      title: 'experiencia numero 3',
-      subtitle: 'Universidad Tegnologica Cordoba.',
-      fechatitle: 'PERIODO DE FINALIZACION',
-      thumbnail: 'assets/education/universidad.jpg',
-      fechainicial: ''
-    },
-
-  ]; 
-
-  */
 
   login: boolean = true;
 
@@ -105,7 +72,12 @@ export class EducacionComponent implements OnInit {
       
     };
     
-   this.localstorageService.getRolValue$().pipe(map(rol =>{ this.ESADMIN = rol, console.log(rol)})).subscribe();
+   this.localstorageService.getRolValue$().pipe(map(rol =>{ this.ESADMIN = rol,
+    console.log(rol)
+    if(rol !== "ADMIN"){
+      this.crearcard = false;
+    }
+  })).subscribe();
 
    this.formulario_educacion();
 
@@ -229,14 +201,12 @@ export class EducacionComponent implements OnInit {
   Cardlist(){
     return this.eduservices.getcardlist().pipe(map(cards => {
       this.cardlistdatabase = cards;
-      console.log(this.cardlistdatabase);
-    
     })).subscribe();
   }
 
 
   submit_educacion(){
-    console.log(this.dateinicio);
+
   }
 
   //SUBMIT CARD
@@ -252,7 +222,6 @@ export class EducacionComponent implements OnInit {
     educacioncardm.append("datefinal", this.datefinal_nuevo);
 
     this.eduservices.s_crearnuevacard(educacioncardm).pipe(map(data => {
-      console.log(JSON.stringify(data));
 
     })).subscribe();
 
@@ -262,12 +231,9 @@ export class EducacionComponent implements OnInit {
     const educaciondata = new FormData();
     educaciondata.append("tituloupdate", this.titulocard);
 
-    this.eduservices.s_updatetitulo(educaciondata).pipe(map(data => console.log(data))).subscribe({next: data => data});
+    this.eduservices.s_updatetitulo(educaciondata).pipe(map(data => data)).subscribe({next: data => data});
   }
 
-  cerrartitulo(){
-    console.log("cerrartitulo");
-  }
 
   //IMAGEN PARA NUEVOS CARD
   ThumbnailcardPreview($thumbnailfile){
@@ -293,8 +259,6 @@ export class EducacionComponent implements OnInit {
     console.log(thumbnailcarddata)
 
     this.eduservices.s_updatethumbnailcard(thumbnailcarddata).pipe(map(imagen => {
-
-      console.log(imagen);
 
     })).subscribe(
     
@@ -323,7 +287,7 @@ export class EducacionComponent implements OnInit {
       this.Cardlist();
       
     })).subscribe();
-    console.log("HOASODSDASDASDAS ASD ASDAS D ASDASD ASD ADASDASDASDD D AS D AD AS D ASD ASD A DA SD AS DDD D D D DD  D D D DD D DSSSS ");
+    
   }
 
   // subtitulo card update
@@ -333,7 +297,7 @@ export class EducacionComponent implements OnInit {
     subtitulocarddata.append("subtitulocardupdate", this.subtitulocard);
 
     this.eduservices.s_updatesubtitulocard(subtitulocarddata).pipe(map(dato => dato)).subscribe();
-    console.log("HOASODSDASDASDAS ASD ASDAS D ASDASD ASD ADASDASDASDD D AS D AD AS D ASD ASD A DA SD AS DDD D D D DD  D D D DD D DSSSS ");
+  
   }
 
   ActualizarTitulofechacard(id){
@@ -346,7 +310,7 @@ export class EducacionComponent implements OnInit {
       {
         this.Cardlist();
       })).subscribe();
-    console.log("HOASODSDASDASDAS ASD ASDAS D ASDASD ASD ADASDASDASDD D AS D AD AS D ASD ASD A DA SD AS DDD D D D DD  D D D DD D DSSSS ");
+   
   }
 
   //actualizar fechas cards
@@ -367,18 +331,13 @@ export class EducacionComponent implements OnInit {
 
   //fechas
   ActualizarFecha(){
-    console.log(typeof(this.dateinicio));
-    console.log("actualizar fecha . . . ");
   }
 
   //metodo de eliminar card
   public Deletecard (id){
     this.eduservices.s_deletecard(id).pipe(map(del =>
-      
-      //cuando es FALSE, significa que se borro el curso exitosamente
-      console.log(del)
-       
-      )).subscribe();
+      del
+    )).subscribe();
   }
 
   //metodos para eliminar y aceptar 
@@ -412,6 +371,5 @@ export class EducacionComponent implements OnInit {
     })
 
   }
-
 
 }

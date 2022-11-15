@@ -30,17 +30,7 @@
     </div>
   </div>
 
-   <!--
-   <div class="custom-shape-divider-bottom-1647393674">
-
-    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-    </svg>
-
-   </div>
-   -->
-
-    <div data-aos="fade-down" data-aos-duration="2500" class="titulo">
+  <div data-aos="fade-down" data-aos-duration="2500" class="titulo">
 
     <ng-container *ngIf="showtitulo; then guardarfalse; else editartrue"></ng-container>
 
@@ -82,48 +72,71 @@
 
      </ng-template>
 
-      <!-- LOG IN -->
-      <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit1'></i>
+      <!-- LOG IN 
+      <i *ngIf="ESADMIN == 'ADMIN'" class='bx bx-edit-alt icon-edit1'></i> -->
    </div>
 
    <div class="cards">
 
     <div *ngIf="ESADMIN == 'ADMIN'" class="btn-admin">
-      <i class='bx bx-window-close icon-edit3' (click)="deletecards()"></i>
-      <i *ngIf="!showcardinput" class="bx bxs-save nuevacard" (click)="showcardinput = !showcardinput"></i>
-      <i *ngIf="showcardinput" class="bx bx-arrow-back nuevabackcard" (click)="showcardinput = !showcardinput"></i>
+
+      <i 
+      *ngIf="cardlistdatabase.length !== 0"
+      [swal]="sweetAlertOptions"
+      (confirm)="alertdelete()"
+      matTooltip="Eliminar Todo" 
+      class='bx bxs-trash icon-edit3'>
+      </i>
+
+      <i 
+      matTooltip="agregar experiencia" 
+      *ngIf="!showcardinput" 
+      class="bx bxs-save nuevacard" 
+      (click)="showcardinput = !showcardinput"></i>
+
+      <i 
+      *ngIf="showcardinput" 
+      class="bx bx-arrow-back nuevabackcard" 
+      (click)="showcardinput = !showcardinput"></i>
+
     </div>
 
     <!-- <h1>el showcardinut es: {{showcardinput}}</h1> -->
 
-    <ng-template [ngIf]="showcardinput">
+    <ng-template [ngIf]="showcardinput"> 
 
-    <form
+    <!-- ESTE FORM SERA DE CREAR NUEVOS--> 
+    
+    <form 
       [formGroup]="form"
       (ngSubmit)="crearnuevacardsubmit()"
-      class="form"
+      class="form newformexp"
       onsubmit="return false"
-      autocomplete="off"
-      >
+      autocomplete="off">
     
-      <label for="tiulocard">Ingresar Titulo card</label>
+      <label for="tiulocard">Ingresar Titulo</label>
       <input type="text" formControlName="titulocard" id="titulocard">
       <span></span>
 
-      <label for="subtitulocard">Ingresar Subtitulo card</label>
+      <label for="subtitulocard">Ingresar Subtitulo</label>
       <input type="text" formControlName="subtitulocard" id="subtitulocard">
 
-      <label for="imagencard">Ingresar Imagen card</label>
+      <label class="imagencard-label" for="imagencard">INGRESAR LA IMAGEN</label>
+
+      
+      <p *ngIf="cargoimagen" style="color: green;">Imagen cargada</p>
+
+      <p *ngIf="!cargoimagen" style="color: red;">Imagen no cargada</p>
+
       <input
       (change)="subirimagen($event)"
       type="file"
       accept="image/*"
       formControlName="imagencard"
-      id="imagencard" />
+      id="imagencard"
+      style="display: none;"/>
 
-
-
-      <button>Crear Nuevo Card</button>
+      <button>Crear</button>
     
     </form>
 
@@ -134,12 +147,10 @@
 
     <!-- <cdk-virtual-scroll-viewport itemSize="400" class="card shadow-1 card1"> -->
     
-    <div class="card shadow-1 card1">
-
+   <div class="card shadow-1 card1" *ngIf="!showcardinput">
   
+   <h1 *ngIf="cardlistdatabase.length == 0">NO HAY INFORMACION PARA MOSTRAR</h1>
 
-   
-  
     <!-- <img [src]="cardlistdatabase.imagencardString" /> -->
    
     <!-- <mat-card *cdkVirtualFor="let cardlist of cardlistdatabase -->
@@ -151,27 +162,54 @@
       >
 
       <!--CERRAR CARD -->
-      <i class='bx bx-window-close cerrarcard' (click)="borrarcardporid(cardlist.id)"></i>
-
+     
       <form 
       [formGroup]="formcardedit"
       (ngSubmit)="actualizarcardsubmit()"
       class="form"
       autocomplete="off">
 
+        <div class="cerrarcard-container">
+
+         <i
+         matTooltip="Eliminar esta card"
+         [swal]="sweetAlertOptions"
+         (confirm)="alertborracardporid(cardlist.id)"
+         *ngIf="ESADMIN === 'ADMIN'"
+         class='bx bx-window-close cerrarcard'></i>
+        </div>
+    
         <mat-card-title class="card-title">
 
-          <p *ngIf="!showinsidecardtitulo" > <!-- data-aos="fade-right" data-aos-duration="2900" retomar -->
+          <p *ngIf="!toggle_titulo[i]" > <!-- data-aos="fade-right" data-aos-duration="2900" retomar -->
             {{cardlist.titulo}}
           </p>
 
-          <input *ngIf="showinsidecardtitulo" type="text" formControlName="tituloeditcard" id="titulocardedit">
+          <input 
+          *ngIf="toggle_titulo[i]" 
+          formControlName="tituloeditcard" 
+          id="titulocardedit" type="text"
+          [ngModel]="cardlist.titulo">
   
           <!-- LOG IN -->
           <ng-template [ngIf]="ESADMIN == 'ADMIN'">
-            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="!showinsidecardtitulo" class='bx bxs-edit-alt icon-edit2 editar '></i>
-            <i (click)="ActualizarTitulo(cardlist.id)" *ngIf="showinsidecardtitulo" (click)="showinsidecardtitulo = !showinsidecardtitulo" class="bx bxs-save icon-edit3 guardar"></i>
-            <i (click)="showinsidecardtitulo = !showinsidecardtitulo" *ngIf="showinsidecardtitulo" class='bx bx-window-close icon-edit3 cerrar'></i>
+            <i 
+            matTooltip="editar titulo"
+            (click)="toggle_titulo[i] = !toggle_titulo[i]" 
+            *ngIf="!toggle_titulo[i]" 
+            class='bx bxs-edit-alt icon-edit2 editar'></i>
+
+            <i 
+            matTooltip="guardar titulo"
+            (click)="ActualizarTitulo(cardlist.id)" 
+            (click)="toggle_titulo[i] = !toggle_titulo[i]"
+            class="bx bxs-save icon-edit3 guardar" 
+            *ngIf="toggle_titulo[i]"></i>
+
+            <i 
+            (click)="toggle_titulo[i] = !toggle_titulo[i]" 
+            *ngIf="toggle_titulo[i]" 
+            class='bx bx-arrow-back icon-edit3 cerrar'></i>
           </ng-template>
           
   
@@ -179,16 +217,50 @@
   
         <mat-card-subtitle class="card-parrafo"> <!--  data-aos="fade-up" data-aos-duration="2400" retomar-->
   
-          <p *ngIf="!showinsidecardsubtitulo" id="p">
-            {{cardlist.subtitulo}}
-          </p>
-          <input *ngIf="showinsidecardsubtitulo" type="text" formControlName="subtituloeditcard" id="subtitulocardedit">
+          <div class="subtitulocontenedor">
+            <p *ngIf="!toggle_subtitulo[i]" id="p">
+              {{cardlist.subtitulo}}
+            </p>
+          </div>
+          
+
+          <input 
+          *ngIf="toggle_subtitulo[i]" 
+          formControlName="subtituloeditcard" 
+          [ngModel]="cardlist.subtitulo"
+          id="subtitulocardedit"
+          type="text"
+          
+          >
   
           <!-- LOG IN -->
           <ng-template [ngIf]="ESADMIN == 'ADMIN'">
-            <i *ngIf="!showinsidecardsubtitulo" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class='bx bx-edit icon-edit3 editar'></i>
-            <i *ngIf="showinsidecardsubtitulo" (click)="ActualizarSubtitulo(cardlist.id)" (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" class="bx bxs-save icon-edit3 guardar" ></i>
-            <i (click)="showinsidecardsubtitulo = !showinsidecardsubtitulo" *ngIf="showinsidecardsubtitulo" class='bx bx-window-close icon-edit3 cerrar'></i>
+
+          <div class="iconoscontenedores">
+
+            <i
+            matTooltip="editar subtitulo" 
+            *ngIf="!toggle_subtitulo[i]" 
+            (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
+            class='bx bx-edit icon-edit3 editar'></i>
+
+            <i
+            matTooltip="guardar subtitulo"
+            *ngIf="toggle_subtitulo[i]"
+            (click)="ActualizarSubtitulo(cardlist.id)" 
+            (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
+            class="bx bxs-save icon-edit3 guardar" ></i>
+
+            <i
+            matTooltip="volver atras"
+            (click)="toggle_subtitulo[i] = !toggle_subtitulo[i]" 
+            *ngIf="toggle_subtitulo[i]" 
+            class='bx bx-arrow-back icon-edit3 cerrar'></i>
+          
+
+          </div>
+            
+
           </ng-template>
           
   
@@ -198,24 +270,41 @@
   
           <div class="container-img">
   
-            <img
-              *ngIf="!showinsidecardimg"
+            <div class="imgcontainer">
+
+              <img
+              *ngIf="!toggle_imagen[i]"
               mat-card-image
               [src]="('data:image/jpg;base64,' + cardlist.imagencardString)"
               intrinsicsize="200x90"
-              alt="imagen exp"
-            />
+              alt="imagen exp"/>
+
+            </div>
+           
   
             <!-- LOG IN -->
             <ng-template [ngIf]="ESADMIN == 'ADMIN'">
 
-              <input
-              (change)="ActualizarImg(cardlist.id ,$event)"
-              type="file"
-              accept="image/*"
-              formControlName="editarimagencard"
-              id="subirimagencard" />
-              
+              <div class="inputcontainer">
+
+               <!-- <i for="subirimagencard" class='bx bxs-balloon'>reiaaaa</i> -->
+                <!-- <label for="subirimagencard"><i class='bx bxs-balloon'></i></label> -->
+
+                <label 
+                matTooltip="actualizar imagen" 
+                class="btn btn-secondary" 
+                for="{{'subirimagencard '+i}}">ACTUALIZAR</label>
+
+                <input
+                (change)="ActualizarImg(cardlist.id ,$event)"
+                type="file"
+                accept="image/*"
+                formControlName="editarimagencard"
+                id="{{'subirimagencard '+i}}"
+                style="display: none;"/>
+
+              </div>
+             
             </ng-template>
   
           </div>
@@ -223,8 +312,11 @@
         </mat-card-content>
 
         
-        <!-- BOTTON DEL SUBMIT INSIDE CARDS -->
-        <button>Actualizar cards</button>
+        <!-- BOTTON DEL SUBMIT INSIDE CARDS 
+        <div class="btn-container">
+          <button *ngIf="ESADMIN === 'ADMIN' ">ACTUALIZAR CARDS</button>
+        </div>
+        -->
 
         
       </form>

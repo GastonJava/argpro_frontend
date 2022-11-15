@@ -10,7 +10,6 @@ export class ExperienciaService {
 
   constructor(private http: HttpClient) { }
 
-
   /* request params GET ALL*/
   public getcardlist(): Observable<any>{
     return this.http.get(`${environment.apiUrl}seccion/experiencia/getcardlist`);
@@ -40,7 +39,6 @@ export class ExperienciaService {
 
  //titulo
  public updatetitulocard<T>(titulo: FormData): Observable<any>{
-  debugger
   return this.http.post(`${environment.apiUrl}seccion/experiencia/updatetitulocard`,titulo);
  }
 
@@ -51,8 +49,6 @@ export class ExperienciaService {
 
  //updateimg
  public updateimg(imagencarddata): Observable<any>{
-  console.log(imagencarddata);
-  debugger
   return this.http.post(`${environment.apiUrl}seccion/experiencia/actualizarimg`, imagencarddata);
 }
 
