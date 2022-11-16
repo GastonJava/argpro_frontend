@@ -1,10 +1,20 @@
+
+app-file-update {
+  width: 90%;
+  background-color: blue;
+}
+
+
 .file-input {
-    position: relative;
-    height: 30px;
-    width: 100px;
+    //position: relative;
+    //height: 40%;
+    //width: 90%;
+    //max-width: 100px;
+    //max-height: 60px;
   }
   
   .file-input > input[type="file"] {
+    display: none;
     position: absoulte;
     opacity: 0;
     top: 0;
@@ -15,11 +25,11 @@
   }
   
   .file-input > label {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    //position: absolute;
+    //top: 0;
+    //right: 0;
+    //left: 0;
+    //bottom: 0;
     background-color: #666;
     color: #fff;
     border-radius: 5px;

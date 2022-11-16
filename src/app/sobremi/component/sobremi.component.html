@@ -1,15 +1,4 @@
 <section class="container">
-  <!--
-  <h2 class="colorrojo">
-    VER EL ROLE DEL USUARIO:
-    <pre>{{ ESADMIN }}</pre>
-  </h2>
-
-  <h2 class="colorrojo">
-    VER SI EL USUARIO ESTA LOGUEADO:
-    <pre>{{ estalogueado }}</pre>
-  </h2>
-  -->
 
   <form
     [formGroup]="form"
@@ -25,6 +14,7 @@
         [ngClass]="editaricon_isshow ? 'class-editarfalse' : 'class-editartrue'"
       >
         <div class="icono-editarcontainer">
+
           <div class="inner-container" *ngIf="ESADMIN == 'ADMIN'">
             <i
               *ngIf="editaricon_isshow"
@@ -35,13 +25,10 @@
             <i
               *ngIf="!editaricon_isshow"
               (click)="editaricon_isshow = !editaricon_isshow"
-              class="bx bx-window-close"
+              class="bx bxs-trash"
             ></i>
           </div>
         </div>
-
-        <!-- PARA CUANDO ESTE LOGUEADO -->
-        <!-- <iframe src="/assets/sobremi/testinglogo1.png" frameborder="0"></iframe> -->
 
         <input type="hidden" formControlName="portada" />
 
@@ -91,9 +78,6 @@
           </div>
         </div>
 
-        <!-- PARA CUANDO ESTE LOGUEADO -->
-
-        <!-- PARA CUANDO ESTE LOGUEADO -->
         <ng-container
           *ngIf="portadaimage != ''; else elseNoImg";
           class="imgcontainer"
@@ -106,15 +90,12 @@
           />
         </ng-container>
 
-        <!--NO IMG -->
         <ng-template #elseNoImg>
           <img src="assets/sobremi/logo_transparente.png" />
         </ng-template>
 
         <!-- <video src="assets/utilities/videotipo1.mp4"></video> -->
       </div>
-
-      <!-- <h1 >{{titulomessage}}</h1> -->
 
       <div class="descripcion">
         <div class="innerdescripcion">
@@ -139,6 +120,7 @@
               <h2 *ngIf="!show">{{ titulomessage }}</h2>
 
               <ng-template #guardarfalse>
+
                 <i
                   (click)="saveTitulo()"
                   (click)="show = !show"
@@ -164,30 +146,8 @@
                   #editar
                 ></i>
               </ng-template>
-
-              <!--
-              <div > 
-
-                <h2>ESSS: .... {{show}}</h2>
-                
-                <i
-                (click)="show = !show"
-                *ngIf="ESADMIN == 'ADMIN' && !show"
-                class="bx bx-edit-alt icon2"
-                ></i> 
-              
-
-              </div>
-              -->
             </div>
-
-            <!--*ngIf="ESADMIN == 'ADMIN' && estalogueado;-->
-
-            <!--data-aos-anchor-placement="top-top" 
-          data-aos-anchor="#trigger-sobremi-h2" -->
           </div>
-
-          <!-- subtitulo  o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o  o o o o o o   -->
 
           <div
             class="subtitulo-contenedor"
@@ -243,7 +203,6 @@
     </div>
   </form>
 
-  
   <div class="custom-shape-divider-bottom-1647393674">
     <svg
       data-name="Layer 1"
@@ -257,48 +216,4 @@
       ></path>
     </svg>
   </div>
-  
 </section>
-
-<!-- ACA VAMOS A TENER QUE BORRAR LO DE ABAJO.... -->
-
-<!--<div class="container row">
-  <div class="col-md-12">
-      <h1>Upload Image</h1>
-  </div>
-</div>
-
-<div class="container row">
-  <div class="col-md-6">
-      <input type="file" (change)="onFileChanged($event)">
-
-  </div>
-  <div class="col-md-6">
-      <input type="button" (click)="subirImagen()" value="upload">
-  </div>
-</div>
-<hr />
-<div class="container row">
-  <div class="col-md-12">
-      <div *ngIf=message>{{message}}</div>
-  </div>
-</div>
-
-<div class="container row">
-  <div class="col-md-6">
-      <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"
-          name="name" />
-  </div>
-  <div class="col-md-6">
-      <input type="button" (click)="getImage()" value="Get Image">
-
-  </div>
-</div>
-
-<div class="container row">
-  <div class="col-md-12">
-      <div *ngIf=retrievedImage>
-          <img [src]="retrievedImage">
-      </div>
-  </div>
-</div> -->

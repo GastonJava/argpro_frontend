@@ -32,6 +32,12 @@ p {
   align-items: center;
   height: 80%;
   width: 18%;
+
+  //TODO: responsive
+  @include lg(){
+    width: 10%;
+    cursor: pointer;
+  }
 }
 
 //=== IMAGEN

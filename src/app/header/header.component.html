@@ -1,32 +1,38 @@
 <div class="background" [ngClass]="ismodalopen ? 'displaynone' : 'displayflex'">
-  <section class="sectionlogo">
+  <section class="sectionlogo" [ngClass]="editar_active ? 'boton-show' : 'boton-noshow'"> <!-- [ngClass]="editar_active ? 'boton-show' : 'boton-noshow' --> 
     <div class="innerlogo">
       <img src="assets/header/APLogo-20-20.png" alt="logo" />
     </div>
   </section>
 
   <section class="sectionpicture">
+    
+    <div class="botones-container"  *ngIf="editar_active">
 
-    <app-file-upload
+      <app-file-upload
       class="input-field"
       id="img"
       (change)="onSave($event)"
       name="imagen"
       *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid == null : '' ">
-    </app-file-upload>
+      </app-file-upload>
 
-    <app-file-update
+      <app-file-update
       (change)="onUpdate($event)"
       *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid != null : '' ">
-    </app-file-update>
+      </app-file-update>
 
-    <app-file-delete
-    [swal]="alertOpt"
-    (confirm)="confirmarDeleteimg($event)"
-    *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid != null : '' ">
-    </app-file-delete>
+      <app-file-delete
+      [swal]="alertOpt"
+      (confirm)="confirmarDeleteimg($event)"
+      *ngIf="editar_active ? ESADMIN == 'ADMIN' && imageid != null : '' ">
+      </app-file-delete>
 
+    </div>
+
+   
     <div class="innerpicture">
+
       <div class="contenedor">
 
         <i
@@ -50,7 +56,27 @@
     </div>
   </section>
 
-  <section class="sectionsociales">
+  <section
+    class="sectionpictureusuario"
+    *ngIf="ESADMIN == 'ADMIN' && logueado == 'SILOGUEADO'"
+  >
+    <div class="innerpictureusuario">
+      <img
+        type="file"
+        *ngIf="!perfilimagen"
+        src="assets/header/img-perfil.png"
+        alt="avatar usuario"
+      />
+
+      <img *ngIf="perfilimagen" [src]="perfilimagen" alt="avatar usuario" />
+      <i
+        class="bx bx-edit-alt icon2"
+        *ngIf="ADMIN == 'ADMIN' && estalogueado"
+      ></i>
+    </div>
+  </section>
+
+  <section *ngIf="!editar_active" class="sectionsociales">
 
     <div class="iconos">
       <div class="p-container">
@@ -99,25 +125,7 @@
     </div>
   </section>
 
-  <section
-    class="sectionpictureusuario"
-    *ngIf="ESADMIN == 'ADMIN' && logueado == 'SILOGUEADO'"
-  >
-    <div class="innerpictureusuario">
-      <img
-        type="file"
-        *ngIf="!perfilimagen"
-        src="assets/header/img-perfil.png"
-        alt="avatar usuario"
-      />
 
-      <img *ngIf="perfilimagen" [src]="perfilimagen" alt="avatar usuario" />
-      <i
-        class="bx bx-edit-alt icon2"
-        *ngIf="ADMIN == 'ADMIN' && estalogueado"
-      ></i>
-    </div>
-  </section>
 </div>
 
 <hr />

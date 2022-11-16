@@ -1,3 +1,5 @@
+@import '../../../assets/utilities/SCSS/main.scss'; 
+
 .container {
     display: flex;
     justify-content: center;
@@ -13,6 +15,10 @@
     background-color: #074343;
     height: 90%;
     width: 90%;
+
+    @include lg(){
+        width: 70%;
+    }
 
     .texto_container {
         display: flex;

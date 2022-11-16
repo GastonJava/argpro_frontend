@@ -37,7 +37,19 @@
 
 }
 
+//boton de logo off/on
+.boton-show {
+    width: 50% !important;
+}
+
+.boton-noshow {
+    width: 90% !important;
+}
+
 .sectionlogo {
+
+   
+   
 
     //background-color: wheat; 
     .innerlogo {
@@ -65,6 +77,15 @@
     height: 100%;
     width: 100%;
 
+    .botones-container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        width: 40%;
+        height: 100%;
+    }
+
     .innerpicture {
         display: flex;
         justify-content: center;
@@ -76,6 +97,7 @@
         background: #266d66;
         //background-color: blueviolet;
 
+        
         .contenedor{
             display: flex;
             justify-content: space-between;
