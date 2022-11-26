@@ -409,6 +409,11 @@
                 justify-content: center;
                 line-height: 20px;
                 overflow: hidden;
+
+                //TODO: responsive
+                @include md(){
+                  color: #034012;
+                }
               }
 
               #subirimagencard {

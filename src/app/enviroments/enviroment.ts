@@ -8,5 +8,8 @@ export const environment = {
     //apiUrl: 'https://spring-argpro-backend.azurewebsites.net/api/'
 
     //RAILWAY API
-    apiUrl: 'https://web-production-b878.up.railway.app/api/',
+    //apiUrl: 'https://web-production-b878.up.railway.app/api/',
+
+    //KEYOB (el ultimo funcionando bien)
+    apiUrl: 'https://argentinaprograma-gastonjava.koyeb.app/api/',
 };
