@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    /* apiUrl: 'http://localhost:8080/api/', */
+    apiUrl: 'http://localhost:8080/api/'
 
     //HEROKU
     //apiUrl: 'https://spring-argpro-heroku.herokuapp.com/api/',
@@ -11,5 +11,6 @@ export const environment = {
     //apiUrl: 'https://web-production-b878.up.railway.app/api/',
 
     //KEYOB (el ultimo funcionando bien)
-    apiUrl: 'https://argentinaprograma-gastonjava.koyeb.app/api/',
+    
+    //apiUrl: 'https://argentinaprograma-gastonjava.koyeb.app/api/',
 };
