@@ -17,25 +17,18 @@ import { ModalRouting } from "./modal.routing";
 
 @NgModule({
     imports: [
-      FormsModule,
-      ModalRouting,
-      CommonModule,
-      LoginModule,
-      CrearModule,
-      
-      MaterialModule,
-      
-      MatSlideToggleModule
-     ],
-    entryComponents: [
-      ModalComponent
-    ], 
-    declarations: [
-      ModalComponent,
+        FormsModule,
+        ModalRouting,
+        CommonModule,
+        LoginModule,
+        CrearModule,
+        MaterialModule,
+        MatSlideToggleModule
     ],
-    exports: [
-      
-    ]
-  })
+    declarations: [
+        ModalComponent,
+    ],
+    exports: []
+})
   
   export class ModalModule {}

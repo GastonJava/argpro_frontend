@@ -7,19 +7,14 @@ import { DialogComponent } from "./dialog.component";
 
 @NgModule({
     imports: [
-      CommonModule,
-      MaterialModule
-     ],
-    entryComponents: [
-      DialogComponent
-    ], 
-    declarations: [
-      DialogComponent,
-      FormdialogComponent 
+        CommonModule,
+        MaterialModule
     ],
-    exports: [
-  
-    ]
-  })
+    declarations: [
+        DialogComponent,
+        FormdialogComponent
+    ],
+    exports: []
+})
   
   export class DialogModule {}
